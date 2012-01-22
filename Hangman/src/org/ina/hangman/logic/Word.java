@@ -20,7 +20,7 @@ public class Word {
 	public boolean guess(char c) {
 		//se la lettera è già stata detta, eccezione!
 		if (_said.contains(c))
-			throw new CharacterAlreadyPutExcetion();
+			throw new CharacterAlreadyPutException();
 		//altrimenti, aggiungiamo alle lettere dette
 		_said.add(c);
 		//controlliamo se c'è
