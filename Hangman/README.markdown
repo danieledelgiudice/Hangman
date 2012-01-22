@@ -10,6 +10,10 @@ credo che adesso manchi solamente la parte riguardante l'interfaccia & l'interaz
 Grafica
 -------
 
+Tutte le immagini sono pronte, probabilmente in futuro andrà sistemato per supportare le varie risoluzioni, ma per il momento questo basta e avanza.
+Con calma andrà realizzata anche un'icona 72x72 
+
+<s>
 A giudicare dalle immagini di carlo (molto ben fatte, complimenti), per quanto riguarda la grafica servono:
 
 * Sfondo (io direi di lasciare il solito per tutta l'app), privo di qualsiasi elemento aggiuntivo
@@ -20,12 +24,12 @@ A giudicare dalle immagini di carlo (molto ben fatte, complimenti), per quanto r
 * Font
 * 5 (+1) immagini dell'impiccato:
 	* Vuota
-	* Solo asta orizzontale
-	* Tutto il "sostegno"
+	* Il "sostegno"
 	* Sostegno + testa
 	* Sostegno + testa + corpo
 	* Sostegno + testa + corpo + braccia
 	* Sostegno + testa + corpo + braccia + gambe + croci sugli occhi
+</s>
 
 
 Suoni
