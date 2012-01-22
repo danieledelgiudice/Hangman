@@ -1,5 +1,7 @@
 package org.ina.hangman.logic;
 
+//rappresenta un gioco ad impiccato
+//una volta terminata la partita non è possibile più fare niente
 public class Game {
 	private static final int MAX_ERRORS = 5; 
 	
@@ -12,9 +14,10 @@ public class Game {
 		_errors = 0;
 	}
 	
-	public boolean Guess(char c) {
-		boolean isThere = _word.Guess(c);
+	public boolean guess(char c) {
+		boolean isThere = _word.guess(c);
 		
+		//se la lettera non è presente aumentiamo gli errori
 		if(!isThere) {
 			_errors++;
 		}
@@ -27,7 +30,7 @@ public class Game {
 		return _word.getOutputWord();
 	}
 	
-	public boolean Win() {
+	public boolean win() {
 		//controlliamo ogni carattere della stringa
 		//se c'è un _, non hai ancora vinto
 		for(char c : _word.getOutputWord())
@@ -36,7 +39,7 @@ public class Game {
 		return true;
 	}
 	
-	public boolean Lose() {
+	public boolean lose() {
 		return _errors >= MAX_ERRORS;
 	}
 }

@@ -17,7 +17,7 @@ public class Word {
 	
 	//metodo per verificare la presenza del carattere c
 	//ritorna true se il carattere è presente, false altrimenti
-	public boolean Guess(char c) {
+	public boolean guess(char c) {
 		//se la lettera è già stata detta, eccezione!
 		if (_said.contains(c))
 			throw new CharacterAlreadyPutExcetion();
