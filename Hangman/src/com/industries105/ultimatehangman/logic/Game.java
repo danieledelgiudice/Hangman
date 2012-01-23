@@ -1,4 +1,4 @@
-package org.ina.hangman.logic;
+package com.industries105.ultimatehangman.logic;
 
 //rappresenta un gioco ad impiccato
 //una volta terminata la partita non è possibile più fare niente

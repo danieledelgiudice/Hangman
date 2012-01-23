@@ -1,4 +1,4 @@
-package org.ina.hangman.logic;
+package com.industries105.ultimatehangman.logic;
 
 public class BananaRepository implements WordRepository {
 

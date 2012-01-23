@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello">Hello World, HangmanActivity!</string>
-    <string name="app_name">Hangman</string>
+    <string name="app_name">Ultimate Hangman</string>
 
 </resources>

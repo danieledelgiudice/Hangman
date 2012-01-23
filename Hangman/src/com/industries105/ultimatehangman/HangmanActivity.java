@@ -1,4 +1,6 @@
-package org.ina.hangman;
+package com.industries105.ultimatehangman;
+
+import com.industries105.ultimatehangman.R;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package org.ina.hangman.logic;
+package com.industries105.ultimatehangman.logic;
 
 import java.util.*;
 
