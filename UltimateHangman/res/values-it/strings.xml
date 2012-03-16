@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ultimate Hangman</string>
+	<string name="play_button">Gioca!</string>
+	<string name="options_button">Opzioni</string>
+	<string name="info">Ultimate Hangman nasce come revisione del classico gioco dell\'Impiccato. Affronta il gioco in una veste grafica innovata e con nuove frenetiche modalità di gioco!</string>
+	
+	<string name="two_players_prompt_title">Ultimate Hangman</string>
+	<string name="two_players_prompt_message">Scegli la parola da indovinare</string>
+	<string name="two_players_prompt_positive">Ok</string>
+	<string name="two_players_prompt_negative">Annulla</string>
+	<string name="two_players_prompt_error">La parola può contenere solamente lettere, e può essere al più 13 caratteri.</string>
+	
+	<string name="score">Punti:</string>
+</resources>
