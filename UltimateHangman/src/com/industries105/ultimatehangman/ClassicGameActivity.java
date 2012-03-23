@@ -93,7 +93,7 @@ public class ClassicGameActivity extends Activity {
 			TextView tv = new TextView(this);
 			
 			final float scale = getResources().getDisplayMetrics().density;
-			int width = (int) (25 * scale + 0.5f);
+			int width = (int) (22 * scale + 0.5f);
 			LayoutParams params = new LayoutParams(width, LayoutParams.WRAP_CONTENT);
 			tv.setLayoutParams(params);
 			tv.setText(Character.toString(word[i]));

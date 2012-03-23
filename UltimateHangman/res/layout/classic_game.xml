@@ -23,13 +23,23 @@
         android:layout_alignParentRight="true"
         android:layout_margin="10dp"
         android:background="@drawable/retry_button_background" />
+    
+    <!--  Separator -->
+    <ImageView
+        android:id="@+id/classic_game_up_hr1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/classic_game_retry_button"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="0dp"
+        android:background="@drawable/uphr" />
 
     <!--  Hangman -->
     <ImageView
         android:id="@+id/classic_game_hangman"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/classic_game_retry_button"
+        android:layout_below="@id/classic_game_up_hr1"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:background="@drawable/hm0" />
@@ -44,12 +54,22 @@
         android:layout_margin="10dp"
         android:orientation="horizontal" />
     
+    <!--  Separator -->
+    <ImageView
+        android:id="@+id/classic_game_up_hr2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/classic_game_word"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="0dp"
+        android:background="@drawable/uphr" />
+    
     <!--  Keyboard -->
     <TableLayout
         android:id="@+id/classic_game_keyboard"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/classic_game_word"
+        android:layout_below="@id/classic_game_up_hr2"
         android:layout_marginTop="10dp">
         <TableRow>
             <TextView

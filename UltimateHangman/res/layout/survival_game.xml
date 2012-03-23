@@ -29,23 +29,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_above="@id/classic_game_hangman">
+        android:layout_above="@id/classic_game_up_hr1"
+        android:layout_marginBottom="5dp">
         
     	<TextView
     	    android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
     	    android:id="@+id/survival_game_score_label"
 	        android:text="@string/score"
-	        android:textSize="20sp"/>
+	        android:textSize="24sp"/>
     	<TextView
     	    android:layout_width="30dp"
         	android:layout_height="wrap_content"
     	    android:id="@+id/survival_game_score"
     	    android:text="0"
     	    android:gravity="center"
-    	    android:textSize="20sp"/>    
+    	    android:textSize="24sp"/>    
 	        
     </LinearLayout>
+    
+    <!--  Separator -->
+    <ImageView
+        android:id="@+id/classic_game_up_hr1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/classic_game_retry_button"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="0dp"
+        android:background="@drawable/uphr" />
     
     
     <!--  Hangman -->
@@ -53,7 +64,7 @@
         android:id="@+id/classic_game_hangman"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/classic_game_retry_button"
+        android:layout_below="@id/classic_game_up_hr1"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:background="@drawable/hm0" />
@@ -68,12 +79,22 @@
         android:layout_margin="10dp"
         android:orientation="horizontal" />
     
+    <!--  Separator -->
+    <ImageView
+        android:id="@+id/classic_game_up_hr2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/classic_game_word"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="0dp"
+        android:background="@drawable/uphr" />
+    
     <!--  Keyboard -->
     <TableLayout
         android:id="@+id/classic_game_keyboard"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/classic_game_word"
+        android:layout_below="@id/classic_game_up_hr2"
         android:layout_marginTop="10dp">
         <TableRow>
             <TextView
