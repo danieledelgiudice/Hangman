@@ -3,13 +3,13 @@ package com.industries105.ultimatehangman;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class GameModeMenuActivity extends Activity {
 	
@@ -21,7 +21,10 @@ public class GameModeMenuActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         					 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         
+        
+        setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         
         setContentView(R.layout.game_mode_menu);
@@ -45,6 +48,7 @@ public class GameModeMenuActivity extends Activity {
         backButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playClick();
 				finish();
 			}
 		});
@@ -52,6 +56,7 @@ public class GameModeMenuActivity extends Activity {
         classicButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playClick();
 				Intent intent = new Intent(GameModeMenuActivity.this, ClassicGameActivity.class);
 				startActivity(intent);
 				//Toast toast = Toast.makeText(GameModeMenuActivity.this, "Not supported yet.", Toast.LENGTH_SHORT);
@@ -63,6 +68,7 @@ public class GameModeMenuActivity extends Activity {
         multiplayerButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playClick();
 				Intent intent = new Intent(GameModeMenuActivity.this, TwoPlayersGameActivity.class);
 				startActivity(intent);
 				//Toast toast = Toast.makeText(GameModeMenuActivity.this, "Not supported yet.", Toast.LENGTH_SHORT);
@@ -74,8 +80,11 @@ public class GameModeMenuActivity extends Activity {
 		arcadeButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Toast toast = Toast.makeText(GameModeMenuActivity.this, "Not supported yet.", Toast.LENGTH_SHORT);
-				toast.show();
+				SoundManager.playClick();
+				Intent intent = new Intent(GameModeMenuActivity.this, ArcadeGameActivity.class);
+				startActivity(intent);
+				//Toast toast = Toast.makeText(GameModeMenuActivity.this, "Not supported yet.", Toast.LENGTH_SHORT);
+				//toast.show();
 			}
 		});
 		
@@ -83,6 +92,7 @@ public class GameModeMenuActivity extends Activity {
 		survivalButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
+				SoundManager.playClick();
 				Intent intent = new Intent(GameModeMenuActivity.this, SurvivalGameActivity.class);
 				startActivity(intent);
 				//Toast toast = Toast.makeText(GameModeMenuActivity.this, "Not supported yet.", Toast.LENGTH_SHORT);

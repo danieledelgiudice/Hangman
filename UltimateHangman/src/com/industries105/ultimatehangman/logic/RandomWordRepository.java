@@ -21,7 +21,9 @@ public class RandomWordRepository implements WordRepository {
 		
 		try {
 			while((line = buf.readLine()) != null) {
-				words.add(line);
+				int length = line.length();
+				if(length >= 3 && length <= 10)
+					words.add(line);
 			}
 			buf.close();
 		} catch (IOException e) {

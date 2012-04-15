@@ -35,9 +35,7 @@ public class Game {
 	
 	public String getSolution() {
 		//ritorniamo la soluzione
-		if(lose())
-			return _word.getSolution();
-		return null;		
+		return _word.getSolution();
 	}
 	
 	public boolean win() {

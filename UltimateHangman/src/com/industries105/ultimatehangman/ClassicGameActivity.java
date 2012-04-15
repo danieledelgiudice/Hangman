@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +34,7 @@ public class ClassicGameActivity extends Activity {
     private OnClickListener keyPressed = new OnClickListener() {
 		
 		public void onClick(View v) {
+			SoundManager.playClick();
 			TextView tv = (TextView) v;
 			tv.setEnabled(false);
 			game.guess(tv.getText().charAt(0));
@@ -62,6 +65,10 @@ public class ClassicGameActivity extends Activity {
         setupView();
         setupGame();
         setupWordLayout();
+        
+        // debug
+    	Toast.makeText(this, game.getSolution(), Toast.LENGTH_SHORT).show();
+        // end debug
     }
     
     private void updateHangman() {
@@ -93,7 +100,7 @@ public class ClassicGameActivity extends Activity {
 			TextView tv = new TextView(this);
 			
 			final float scale = getResources().getDisplayMetrics().density;
-			int width = (int) (22 * scale + 0.5f);
+			int width = (int) (25 * scale + 0.5f);
 			LayoutParams params = new LayoutParams(width, LayoutParams.WRAP_CONTENT);
 			tv.setLayoutParams(params);
 			tv.setText(Character.toString(word[i]));
@@ -115,7 +122,9 @@ public class ClassicGameActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         					 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         
+        setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         
         setContentView(R.layout.classic_game);
@@ -129,6 +138,7 @@ public class ClassicGameActivity extends Activity {
         backButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
+				SoundManager.playClick();
 				finish();
 			}
 		});
@@ -137,6 +147,7 @@ public class ClassicGameActivity extends Activity {
         retryButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playClick();
 				Intent intent = getIntent();
 				finish();
 				startActivity(intent);

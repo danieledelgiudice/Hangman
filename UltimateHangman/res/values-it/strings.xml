@@ -12,4 +12,5 @@
 	<string name="two_players_prompt_error">La parola può contenere solamente lettere, e può essere al più 13 caratteri.</string>
 	
 	<string name="score">Punti:</string>
+	<string name="time">Tempo:</string>
 </resources>

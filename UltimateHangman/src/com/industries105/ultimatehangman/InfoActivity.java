@@ -2,6 +2,7 @@ package com.industries105.ultimatehangman;
 
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,9 +20,11 @@ public class InfoActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         					 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-		
+        setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
+        
 		setContentView(R.layout.info);
 		
 		// Selezione font
@@ -34,6 +37,7 @@ public class InfoActivity extends Activity {
         backButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playSound(1, 1);
 				finish();
 			}
 		});

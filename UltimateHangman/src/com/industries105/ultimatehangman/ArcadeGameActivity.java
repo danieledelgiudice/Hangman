@@ -1,21 +1,23 @@
 package com.industries105.ultimatehangman;
 
+import java.io.InputStream;
+import java.util.HashSet;
+
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -23,14 +25,18 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.industries105.ultimatehangman.logic.FixedWordRepository;
 import com.industries105.ultimatehangman.logic.Game;
-import com.industries105.ultimatehangman.logic.Word;
+import com.industries105.ultimatehangman.logic.RandomWordRepository;
 import com.industries105.ultimatehangman.logic.WordRepository;
 
-public class TwoPlayersGameActivity extends Activity {
+public class ArcadeGameActivity extends Activity {
+	private static final int ARCADE_TIME = 120;
 	private Game game;
-	private Typeface font;
+	private Typeface font;	
+	protected TextView timeTextView;	
+	private Handler handler;
+	private long startTime;
+	private int score;
 	
 	//Keyboard
     private OnClickListener keyPressed = new OnClickListener() {
@@ -44,18 +50,53 @@ public class TwoPlayersGameActivity extends Activity {
 			updateWordLayout();
 			updateHangman();
 			
+			//debug instruction
+			if(tv.getText().charAt(0) == 'Z')
+				Toast.makeText(ArcadeGameActivity.this, game.getSolution(), Toast.LENGTH_LONG).show();
+			//end debug instruction
+			
 			if(game.win()) {
-				Toast toast = Toast.makeText(TwoPlayersGameActivity.this, "You won!", Toast.LENGTH_LONG);
+				score += getScore(game.getSolution());
+				Toast toast = Toast.makeText(ArcadeGameActivity.this, "You won! Score: " + score, Toast.LENGTH_LONG);
 				toast.show();
-				finish();
+				newGame();
+				//finish();
 			}
 			
 			if(game.lose()) {
 				String s = "You lost! The word was " + game.getSolution();
-				Toast toast = Toast.makeText(TwoPlayersGameActivity.this, s, Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(ArcadeGameActivity.this, s, Toast.LENGTH_LONG);
 				toast.show();
 				finish();
 			}
+		}
+	};
+	
+	private int getScore(String solution) {
+		HashSet<Character> set = new HashSet<Character>();
+		for(char c : solution.toCharArray())
+			set.add(c);
+		return set.size() * 10;
+	}
+	
+	private Runnable timerTick = new Runnable() {
+		
+		public void run() {
+			long millis = System.currentTimeMillis() - startTime;
+			int seconds = ARCADE_TIME - (int) (millis / 1000);
+			
+			if(seconds >= 0) {
+				//abbiamo ancora tempo
+				timeTextView.setText(seconds + "s");
+				handler.postDelayed(timerTick, 200);
+			} else {
+				String s = "You lost! The word was " + game.getSolution();
+				Toast toast = Toast.makeText(ArcadeGameActivity.this, s, Toast.LENGTH_LONG);
+				toast.show();
+				finish();
+			}
+			
+			
 		}
 	};
 	
@@ -65,10 +106,23 @@ public class TwoPlayersGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         setupView();
-        setupGame();
+        newGame();
+        startTimer();
     }
+
+	private void newGame() {
+		setupGame();
+        setupWordLayout();
+        enableKeyboard();
+	}
     
-    private void updateHangman() {
+    private void startTimer() {
+		startTime = System.currentTimeMillis();
+		handler = new Handler();
+		handler.postDelayed(timerTick, 200);
+	}
+
+	private void updateHangman() {
 		ImageView hangman = (ImageView) findViewById(R.id.classic_game_hangman);
 		hangman.setImageResource(R.drawable.hm0 + game.getErrors());
 	}
@@ -91,6 +145,7 @@ public class TwoPlayersGameActivity extends Activity {
 		int wordLen = word.length;
 		
 		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
+		wordLayout.removeAllViews();
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -104,64 +159,33 @@ public class TwoPlayersGameActivity extends Activity {
 			tv.setTextColor(Color.WHITE);
 			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
 			tv.setTypeface(font);
+			tv.setGravity(Gravity.CENTER_HORIZONTAL);
 			
 			wordLayout.addView(tv);
 		}
 	}
 
 	private void setupGame() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		
-		builder.setTitle(R.string.two_players_prompt_title);
-		builder.setMessage(R.string.two_players_prompt_message);
-		
-		final LinearLayout layout = new LinearLayout(this);
-		final EditText input = new EditText(this);
-		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
-																	 LinearLayout.LayoutParams.WRAP_CONTENT);
-		final float scale = getResources().getDisplayMetrics().density;
-		int margin = (int) (20 * scale + 0.5f);
-		lp.setMargins(margin, 0, margin, margin);
-		input.setLayoutParams(lp);
-		
-		layout.addView(input);
-		
-		builder.setView(layout);
-		builder.setCancelable(false);
-		
-		builder.setPositiveButton(R.string.two_players_prompt_positive,
-				new DialogInterface.OnClickListener() {
-					
-					public void onClick(DialogInterface dialog, int which) {
-						SoundManager.playClick();
-						String word = input.getText().toString().toUpperCase();
-						
-						if(Word.isAValidWord(word))
-						{
-							WordRepository repo = new FixedWordRepository(word);
-							game = new Game(repo);
-							setupWordLayout();
-							
-						} else {
-							Toast toast = Toast.makeText(TwoPlayersGameActivity.this,
-									 R.string.two_players_prompt_error, Toast.LENGTH_SHORT);
-							toast.show();
-							setupGame();
-						}
-					}
-				});
-		
-		builder.setNegativeButton(R.string.two_players_prompt_negative,
-				new DialogInterface.OnClickListener() {
-					
-					public void onClick(DialogInterface dialog, int which) {
-						SoundManager.playClick();
-						finish();
-					}
-				});
-		
-		builder.show();
+		InputStream is = getResources().openRawResource(R.raw.wordlist);
+		WordRepository repo = new RandomWordRepository(is);
+		game = new Game(repo);
 	}
+	
+	private void enableKeyboard()
+    {
+		TableLayout keyboard = (TableLayout) findViewById(R.id.classic_game_keyboard);
+        for(int i = 0; i < 3; i++)
+        {
+        	TableRow row = (TableRow) keyboard.getChildAt(i);
+        	int count = row.getChildCount();
+        	for(int j = 0; j < count; j++)
+        	{
+        		//Key initialization
+        		TextView tv = (TextView) row.getChildAt(j);
+        		tv.setEnabled(true);
+        	}
+        }
+    }
 
 	private void setupView() {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -172,7 +196,7 @@ public class TwoPlayersGameActivity extends Activity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
         
-        setContentView(R.layout.classic_game);
+        setContentView(R.layout.arcade_game);
         
         // Selezione font
         font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
@@ -213,11 +237,19 @@ public class TwoPlayersGameActivity extends Activity {
         		tv.setOnClickListener(keyPressed);
         	}
         }
+        
+        timeTextView = (TextView) findViewById(R.id.arcade_game_time);
+        timeTextView.setTypeface(font);
+        
+        TextView timeLabelTextView = (TextView) findViewById(R.id.arcade_game_time_label);
+        timeLabelTextView.setTypeface(font); 
 	}
     
     @Override
     protected void onPause() {
     	super.onPause();
+    	handler.removeCallbacks(timerTick);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-    }
+        finish();
+    }    
 }

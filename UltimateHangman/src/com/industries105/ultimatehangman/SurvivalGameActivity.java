@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -34,6 +35,7 @@ public class SurvivalGameActivity extends Activity {
     private OnClickListener keyPressed = new OnClickListener() {
 		
 		public void onClick(View v) {
+			SoundManager.playClick();
 			TextView tv = (TextView) v;
 			tv.setEnabled(false);
 			game.guess(tv.getText().charAt(0));
@@ -110,7 +112,7 @@ public class SurvivalGameActivity extends Activity {
 			TextView tv = new TextView(this);
 			
 			final float scale = getResources().getDisplayMetrics().density;
-			int width = (int) (22 * scale + 0.5f);
+			int width = (int) (25 * scale + 0.5f);
 			LayoutParams params = new LayoutParams(width, LayoutParams.WRAP_CONTENT);
 			tv.setLayoutParams(params);
 			tv.setText(Character.toString(word[i]));
@@ -132,8 +134,10 @@ public class SurvivalGameActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         					 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
         
         setContentView(R.layout.survival_game);
         
@@ -153,6 +157,7 @@ public class SurvivalGameActivity extends Activity {
         backButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
+				SoundManager.playClick();
 				finish();
 			}
 		});
@@ -162,6 +167,7 @@ public class SurvivalGameActivity extends Activity {
         retryButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playClick();
 				Intent intent = getIntent();
 				finish();
 				startActivity(intent);
