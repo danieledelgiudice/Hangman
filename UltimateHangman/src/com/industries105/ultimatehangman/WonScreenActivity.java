@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class InfoActivity extends Activity {
+public class WonScreenActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,22 +25,26 @@ public class InfoActivity extends Activity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
         
-		setContentView(R.layout.info);
+		setContentView(R.layout.won_screen);
 		
 		// Selezione font
         Typeface font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
         
-        TextView tv = (TextView) findViewById(R.id.text_view);
-        tv.setTypeface(font);
+        TextView winTextView = (TextView) findViewById(R.id.you_win);
+        winTextView.setTypeface(font);
         
-        Button backButton = (Button) findViewById(R.id.back_button);
-        backButton.setOnClickListener(new OnClickListener() {
+        Button restartButton = (Button) findViewById(R.id.restart);
+        restartButton.setTypeface(font);
+        
+        Button backToModeButton = (Button) findViewById(R.id.back_to_mode_selection_button);
+        backToModeButton.setTypeface(font);
+        backToModeButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				SoundManager.playSound(1, 1);
 				finish();
 			}
 		});
+        
 	}
 	
 	@Override

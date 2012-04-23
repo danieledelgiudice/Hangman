@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,19 +42,29 @@ public class ClassicGameActivity extends Activity {
 			updateHangman();
 			
 			if(game.win()) {
-				Toast toast = Toast.makeText(ClassicGameActivity.this, "You won!", Toast.LENGTH_LONG);
-				toast.show();
-				finish();
+				onWin();
 			}
 			
 			if(game.lose()) {
-				String s = "You lost! The word was " + game.getSolution();
-				Toast toast = Toast.makeText(ClassicGameActivity.this, s, Toast.LENGTH_LONG);
-				toast.show();
-				finish();
+				onLose();
 			}
 		}
 	};
+	
+	private void onLose() {
+		String s = "You lost! The word was " + game.getSolution();
+		Toast toast = Toast.makeText(ClassicGameActivity.this, s, Toast.LENGTH_LONG);
+		toast.show();
+		finish();
+	}
+
+	private void onWin() {
+		//Toast toast = Toast.makeText(ClassicGameActivity.this, "You won!", Toast.LENGTH_LONG);
+		//toast.show();
+		Intent intent = new Intent(ClassicGameActivity.this, WonScreenActivity.class);
+		startActivity(intent);
+		finish();
+	}
 	
     /** Called when the activity is first created. */
     @Override
@@ -72,7 +81,7 @@ public class ClassicGameActivity extends Activity {
     }
     
     private void updateHangman() {
-		ImageView hangman = (ImageView) findViewById(R.id.classic_game_hangman);
+		ImageView hangman = (ImageView) findViewById(R.id.hangman);
 		hangman.setImageResource(R.drawable.hm0 + game.getErrors());
 	}
     
@@ -80,7 +89,7 @@ public class ClassicGameActivity extends Activity {
     	char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -93,7 +102,7 @@ public class ClassicGameActivity extends Activity {
 		char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -134,7 +143,7 @@ public class ClassicGameActivity extends Activity {
         
         
         //Back button
-        Button backButton = (Button) findViewById(R.id.classic_game_back_button);
+        Button backButton = (Button) findViewById(R.id.back_button);
         backButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -143,7 +152,7 @@ public class ClassicGameActivity extends Activity {
 			}
 		});
         
-        Button retryButton = (Button) findViewById(R.id.classic_game_retry_button);
+        Button retryButton = (Button) findViewById(R.id.retry_button);
         retryButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
@@ -154,7 +163,7 @@ public class ClassicGameActivity extends Activity {
 			}
 		});
         
-        TableLayout keyboard = (TableLayout) findViewById(R.id.classic_game_keyboard);
+        TableLayout keyboard = (TableLayout) findViewById(R.id.keyboard);
         for(int i = 0; i < 3; i++)
         {
         	TableRow row = (TableRow) keyboard.getChildAt(i);

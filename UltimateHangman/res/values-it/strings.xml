@@ -13,4 +13,8 @@
 	
 	<string name="score">Punti:</string>
 	<string name="time">Tempo:</string>
+	
+    <string name="victory">Hai vinto!</string>
+   	<string name="restart_game">Gioca ancora</string>
+	<string name="back_to_mode_selection">Menu modalita\'</string>
 </resources>

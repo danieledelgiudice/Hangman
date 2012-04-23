@@ -4,4 +4,7 @@
 	<string name="play_button">Play!</string>
 	<string name="options_button">Options</string>
 	<string name="info">Ultimate Hangman is awesome!</string>
+	<string name="victory">You won!</string>
+	<string name="restart_game">Play again</string>
+	<string name="back_to_mode_selection">Game mode menu</string>
 </resources>

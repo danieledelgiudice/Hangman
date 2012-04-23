@@ -123,7 +123,7 @@ public class ArcadeGameActivity extends Activity {
 	}
 
 	private void updateHangman() {
-		ImageView hangman = (ImageView) findViewById(R.id.classic_game_hangman);
+		ImageView hangman = (ImageView) findViewById(R.id.hangman);
 		hangman.setImageResource(R.drawable.hm0 + game.getErrors());
 	}
     
@@ -131,7 +131,7 @@ public class ArcadeGameActivity extends Activity {
     	char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -144,7 +144,7 @@ public class ArcadeGameActivity extends Activity {
 		char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
 		wordLayout.removeAllViews();
 		
 		for(int i = 0; i < wordLen; i++)
@@ -173,7 +173,7 @@ public class ArcadeGameActivity extends Activity {
 	
 	private void enableKeyboard()
     {
-		TableLayout keyboard = (TableLayout) findViewById(R.id.classic_game_keyboard);
+		TableLayout keyboard = (TableLayout) findViewById(R.id.keyboard);
         for(int i = 0; i < 3; i++)
         {
         	TableRow row = (TableRow) keyboard.getChildAt(i);
@@ -203,7 +203,7 @@ public class ArcadeGameActivity extends Activity {
         
         
         //Back button
-        Button backButton = (Button) findViewById(R.id.classic_game_back_button);
+        Button backButton = (Button) findViewById(R.id.back_button);
         backButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -212,7 +212,7 @@ public class ArcadeGameActivity extends Activity {
 			}
 		});
         
-        Button retryButton = (Button) findViewById(R.id.classic_game_retry_button);
+        Button retryButton = (Button) findViewById(R.id.retry_button);
         retryButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
@@ -223,7 +223,7 @@ public class ArcadeGameActivity extends Activity {
 			}
 		});
         
-        TableLayout keyboard = (TableLayout) findViewById(R.id.classic_game_keyboard);
+        TableLayout keyboard = (TableLayout) findViewById(R.id.keyboard);
         for(int i = 0; i < 3; i++)
         {
         	TableRow row = (TableRow) keyboard.getChildAt(i);
@@ -238,10 +238,10 @@ public class ArcadeGameActivity extends Activity {
         	}
         }
         
-        timeTextView = (TextView) findViewById(R.id.arcade_game_time);
+        timeTextView = (TextView) findViewById(R.id.time);
         timeTextView.setTypeface(font);
         
-        TextView timeLabelTextView = (TextView) findViewById(R.id.arcade_game_time_label);
+        TextView timeLabelTextView = (TextView) findViewById(R.id.time_label);
         timeLabelTextView.setTypeface(font); 
 	}
     

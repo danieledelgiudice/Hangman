@@ -44,14 +44,14 @@ public class MainMenuActivity extends Activity {
         // Selezione font
         Typeface font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
         
-        Button playButton = (Button) findViewById(R.id.main_menu_play_button);        
+        Button playButton = (Button) findViewById(R.id.play_button);        
         playButton.setTypeface(font);
         
-        Button optionButton = (Button) findViewById(R.id.main_menu_option_button);
+        Button optionButton = (Button) findViewById(R.id.option_button);
         optionButton.setTypeface(font);
         
         // Handler audio button
-        Button audioButton = (Button) findViewById(R.id.main_menu_sound_button);
+        Button audioButton = (Button) findViewById(R.id.sound_button);
         audioButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
@@ -63,7 +63,7 @@ public class MainMenuActivity extends Activity {
         audioButton.setBackgroundResource(isSilenced ? R.drawable.audio_off : R.drawable.audio_on);
         
         //Handler info button
-        Button infoButton = (Button) findViewById(R.id.main_menu_info_button);
+        Button infoButton = (Button) findViewById(R.id.info_button);
         infoButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
@@ -105,7 +105,7 @@ public class MainMenuActivity extends Activity {
     	editor.putBoolean("isSilenced", isSilenced);
     	editor.commit();
     	
-    	Button audioButton = (Button) findViewById(R.id.main_menu_sound_button);
+    	Button audioButton = (Button) findViewById(R.id.sound_button);
     	audioButton.setBackgroundResource(isSilenced ? R.drawable.audio_off : R.drawable.audio_on);
 	}
 }

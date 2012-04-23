@@ -32,19 +32,19 @@ public class GameModeMenuActivity extends Activity {
         // Selezione font
         Typeface font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
         
-        Button classicButton = (Button) findViewById(R.id.game_mode_classic_button);        
+        Button classicButton = (Button) findViewById(R.id.classic_button);        
         classicButton.setTypeface(font);
         
-        Button multiplayerButton = (Button) findViewById(R.id.game_mode_multiplayer_button);        
+        Button multiplayerButton = (Button) findViewById(R.id.multiplayer_button);        
         multiplayerButton.setTypeface(font);
         
-        Button arcadeButton = (Button) findViewById(R.id.game_mode_arcade_button);        
+        Button arcadeButton = (Button) findViewById(R.id.arcade_button);        
         arcadeButton.setTypeface(font);
         
-        Button survivalButton = (Button) findViewById(R.id.game_mode_survival_button);        
+        Button survivalButton = (Button) findViewById(R.id.survival_button);        
         survivalButton.setTypeface(font);
         
-        Button backButton = (Button) findViewById(R.id.game_mode_back_button);
+        Button backButton = (Button) findViewById(R.id.back_button);
         backButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {

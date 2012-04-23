@@ -7,7 +7,7 @@
 
 	<!-- Back button -->
     <Button
-        android:id="@+id/info_back_button"
+        android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -16,11 +16,11 @@
 
 	<!--  Logo  -->
     <ImageView
-        android:id="@+id/info_logo"
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/logo"
         />
@@ -29,15 +29,16 @@
 	<!--  Text View -->
 
     <TextView
-        android:id="@+id/info_text_view"
+        android:id="@+id/text_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/info_logo"
+        android:layout_below="@id/logo"
         android:layout_centerHorizontal="true"
         android:layout_margin="30dp"
         android:gravity="center"
         android:text="@string/info"
         android:textColor="@drawable/sketch_button_textcolor"
         android:textSize="16sp" />
+    
             
 </RelativeLayout>

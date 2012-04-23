@@ -69,7 +69,7 @@ public class TwoPlayersGameActivity extends Activity {
     }
     
     private void updateHangman() {
-		ImageView hangman = (ImageView) findViewById(R.id.classic_game_hangman);
+		ImageView hangman = (ImageView) findViewById(R.id.hangman);
 		hangman.setImageResource(R.drawable.hm0 + game.getErrors());
 	}
     
@@ -77,7 +77,7 @@ public class TwoPlayersGameActivity extends Activity {
     	char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -90,7 +90,7 @@ public class TwoPlayersGameActivity extends Activity {
 		char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -179,7 +179,7 @@ public class TwoPlayersGameActivity extends Activity {
         
         
         //Back button
-        Button backButton = (Button) findViewById(R.id.classic_game_back_button);
+        Button backButton = (Button) findViewById(R.id.back_button);
         backButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -188,7 +188,7 @@ public class TwoPlayersGameActivity extends Activity {
 			}
 		});
         
-        Button retryButton = (Button) findViewById(R.id.classic_game_retry_button);
+        Button retryButton = (Button) findViewById(R.id.retry_button);
         retryButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
@@ -199,7 +199,7 @@ public class TwoPlayersGameActivity extends Activity {
 			}
 		});
         
-        TableLayout keyboard = (TableLayout) findViewById(R.id.classic_game_keyboard);
+        TableLayout keyboard = (TableLayout) findViewById(R.id.keyboard);
         for(int i = 0; i < 3; i++)
         {
         	TableRow row = (TableRow) keyboard.getChildAt(i);

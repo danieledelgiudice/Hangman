@@ -11,7 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="10dp"
         android:background="@drawable/backtomenu_button_background" />
     
     <!-- Retry button -->
@@ -20,25 +23,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="2dp"
         android:background="@drawable/retry_button_background" />
-    
+
     <!--  Separator -->
     <ImageView
-        android:id="@+id/up_hr1"
+        android:id="@+id/up_hr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/retry_button"
         android:layout_centerHorizontal="true"
         android:layout_margin="0dp"
         android:background="@drawable/uphr" />
-
+    
+    <!--  Score -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/up_hr"
+        android:layout_marginBottom="5dp">
+        
+    	<TextView
+    	    android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+    	    android:id="@+id/time_label"
+	        android:text="@string/time"
+	        android:layout_marginRight="10dp"
+	        android:textSize="20sp"/>
+    	<TextView
+    	    android:layout_width="50dp"
+        	android:layout_height="wrap_content"
+    	    android:id="@+id/time"
+    	    android:text="0"
+    	    android:gravity="center"
+    	    android:textSize="20sp"/>    
+	        
+    </LinearLayout>
+    
+    
     <!--  Hangman -->
     <ImageView
         android:id="@+id/hangman"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/up_hr1"
+        android:layout_below="@id/up_hr"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:background="@drawable/hm0" />

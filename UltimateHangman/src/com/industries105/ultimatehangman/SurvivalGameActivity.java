@@ -79,7 +79,7 @@ public class SurvivalGameActivity extends Activity {
     }
     
     private void updateScore() {
-    	TextView scoreTextView = (TextView) findViewById(R.id.survival_game_score);
+    	TextView scoreTextView = (TextView) findViewById(R.id.score);
     	scoreTextView.setText(String.valueOf(score));
     }
     
@@ -145,11 +145,11 @@ public class SurvivalGameActivity extends Activity {
         font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
         
         //Score label
-        TextView scoreLabelTextView = (TextView) findViewById(R.id.survival_game_score_label);
+        TextView scoreLabelTextView = (TextView) findViewById(R.id.score_label);
         scoreLabelTextView.setTypeface(font);
         
         //Score
-        TextView scoreTextView = (TextView) findViewById(R.id.survival_game_score);
+        TextView scoreTextView = (TextView) findViewById(R.id.score);
         scoreTextView.setTypeface(font);
         
         //Back button
