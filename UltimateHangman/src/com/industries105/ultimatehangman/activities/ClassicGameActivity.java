@@ -1,17 +1,13 @@
-package com.industries105.ultimatehangman;
+package com.industries105.ultimatehangman.activities;
 
 import java.io.InputStream;
-import java.util.HashSet;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -25,18 +21,15 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.industries105.ultimatehangman.R;
+import com.industries105.ultimatehangman.helpers.SoundManager;
 import com.industries105.ultimatehangman.logic.Game;
 import com.industries105.ultimatehangman.logic.RandomWordRepository;
 import com.industries105.ultimatehangman.logic.WordRepository;
 
-public class ArcadeGameActivity extends Activity {
-	private static final int ARCADE_TIME = 120;
+public class ClassicGameActivity extends Activity {
 	private Game game;
-	private Typeface font;	
-	protected TextView timeTextView;	
-	private Handler handler;
-	private long startTime;
-	private int score;
+	private Typeface font;
 	
 	//Keyboard
     private OnClickListener keyPressed = new OnClickListener() {
@@ -50,55 +43,30 @@ public class ArcadeGameActivity extends Activity {
 			updateWordLayout();
 			updateHangman();
 			
-			//debug instruction
-			if(tv.getText().charAt(0) == 'Z')
-				Toast.makeText(ArcadeGameActivity.this, game.getSolution(), Toast.LENGTH_LONG).show();
-			//end debug instruction
-			
 			if(game.win()) {
-				score += getScore(game.getSolution());
-				Toast toast = Toast.makeText(ArcadeGameActivity.this, "You won! Score: " + score, Toast.LENGTH_LONG);
-				toast.show();
-				newGame();
-				//finish();
+				onWin();
 			}
 			
 			if(game.lose()) {
-				String s = "You lost! The word was " + game.getSolution();
-				Toast toast = Toast.makeText(ArcadeGameActivity.this, s, Toast.LENGTH_LONG);
-				toast.show();
-				finish();
+				onLose();
 			}
 		}
 	};
 	
-	private int getScore(String solution) {
-		HashSet<Character> set = new HashSet<Character>();
-		for(char c : solution.toCharArray())
-			set.add(c);
-		return set.size() * 10;
+	private void onLose() {
+		String s = "You lost! The word was " + game.getSolution();
+		Toast toast = Toast.makeText(ClassicGameActivity.this, s, Toast.LENGTH_LONG);
+		toast.show();
+		finish();
 	}
-	
-	private Runnable timerTick = new Runnable() {
-		
-		public void run() {
-			long millis = System.currentTimeMillis() - startTime;
-			int seconds = ARCADE_TIME - (int) (millis / 1000);
-			
-			if(seconds >= 0) {
-				//abbiamo ancora tempo
-				timeTextView.setText(seconds + "s");
-				handler.postDelayed(timerTick, 200);
-			} else {
-				String s = "You lost! The word was " + game.getSolution();
-				Toast toast = Toast.makeText(ArcadeGameActivity.this, s, Toast.LENGTH_LONG);
-				toast.show();
-				finish();
-			}
-			
-			
-		}
-	};
+
+	private void onWin() {
+		//Toast toast = Toast.makeText(ClassicGameActivity.this, "You won!", Toast.LENGTH_LONG);
+		//toast.show();
+		Intent intent = new Intent(ClassicGameActivity.this, WonScreenActivity.class);
+		startActivity(intent);
+		finish();
+	}
 	
     /** Called when the activity is first created. */
     @Override
@@ -106,23 +74,15 @@ public class ArcadeGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         setupView();
-        newGame();
-        startTimer();
-    }
-
-	private void newGame() {
-		setupGame();
+        setupGame();
         setupWordLayout();
-        enableKeyboard();
-	}
+        
+        // debug
+    	Toast.makeText(this, game.getSolution(), Toast.LENGTH_SHORT).show();
+        // end debug
+    }
     
-    private void startTimer() {
-		startTime = System.currentTimeMillis();
-		handler = new Handler();
-		handler.postDelayed(timerTick, 200);
-	}
-
-	private void updateHangman() {
+    private void updateHangman() {
 		ImageView hangman = (ImageView) findViewById(R.id.hangman);
 		hangman.setImageResource(R.drawable.hm0 + game.getErrors());
 	}
@@ -145,7 +105,6 @@ public class ArcadeGameActivity extends Activity {
 		int wordLen = word.length;
 		
 		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
-		wordLayout.removeAllViews();
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -159,7 +118,6 @@ public class ArcadeGameActivity extends Activity {
 			tv.setTextColor(Color.WHITE);
 			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
 			tv.setTypeface(font);
-			tv.setGravity(Gravity.CENTER_HORIZONTAL);
 			
 			wordLayout.addView(tv);
 		}
@@ -170,22 +128,6 @@ public class ArcadeGameActivity extends Activity {
 		WordRepository repo = new RandomWordRepository(is);
 		game = new Game(repo);
 	}
-	
-	private void enableKeyboard()
-    {
-		TableLayout keyboard = (TableLayout) findViewById(R.id.keyboard);
-        for(int i = 0; i < 3; i++)
-        {
-        	TableRow row = (TableRow) keyboard.getChildAt(i);
-        	int count = row.getChildCount();
-        	for(int j = 0; j < count; j++)
-        	{
-        		//Key initialization
-        		TextView tv = (TextView) row.getChildAt(j);
-        		tv.setEnabled(true);
-        	}
-        }
-    }
 
 	private void setupView() {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -193,10 +135,10 @@ public class ArcadeGameActivity extends Activity {
         					 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         
-        setContentView(R.layout.arcade_game);
+        setContentView(R.layout.classic_game);
         
         // Selezione font
         font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
@@ -237,19 +179,11 @@ public class ArcadeGameActivity extends Activity {
         		tv.setOnClickListener(keyPressed);
         	}
         }
-        
-        timeTextView = (TextView) findViewById(R.id.time);
-        timeTextView.setTypeface(font);
-        
-        TextView timeLabelTextView = (TextView) findViewById(R.id.time_label);
-        timeLabelTextView.setTypeface(font); 
 	}
     
     @Override
     protected void onPause() {
     	super.onPause();
-    	handler.removeCallbacks(timerTick);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-        finish();
-    }    
+    }
 }

@@ -1,4 +1,7 @@
-package com.industries105.ultimatehangman;
+package com.industries105.ultimatehangman.activities;
+
+import com.industries105.ultimatehangman.R;
+import com.industries105.ultimatehangman.helpers.SoundManager;
 
 import android.app.Activity;
 import android.graphics.Typeface;

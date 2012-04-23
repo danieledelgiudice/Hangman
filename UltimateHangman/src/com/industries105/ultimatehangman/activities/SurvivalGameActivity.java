@@ -1,4 +1,4 @@
-package com.industries105.ultimatehangman;
+package com.industries105.ultimatehangman.activities;
 
 import java.io.InputStream;
 import android.app.Activity;
@@ -21,13 +21,17 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.industries105.ultimatehangman.R;
+import com.industries105.ultimatehangman.helpers.SoundManager;
 import com.industries105.ultimatehangman.logic.Game;
 import com.industries105.ultimatehangman.logic.RandomWordRepository;
 import com.industries105.ultimatehangman.logic.WordRepository;
 
-public class ClassicGameActivity extends Activity {
+public class SurvivalGameActivity extends Activity {
 	private Game game;
 	private Typeface font;
+	
+	private int score;
 	
 	//Keyboard
     private OnClickListener keyPressed = new OnClickListener() {
@@ -42,29 +46,22 @@ public class ClassicGameActivity extends Activity {
 			updateHangman();
 			
 			if(game.win()) {
-				onWin();
+				Intent i = getIntent();
+				i.removeExtra("score");
+				i.putExtra("score", score + 1);
+				finish();
+				startActivity(i);
+				
 			}
 			
 			if(game.lose()) {
-				onLose();
+				String s = "You lost! The word was " + game.getSolution() + ". You made " + score + " points.";
+				Toast toast = Toast.makeText(SurvivalGameActivity.this, s, Toast.LENGTH_LONG);
+				toast.show();
+				finish();
 			}
 		}
 	};
-	
-	private void onLose() {
-		String s = "You lost! The word was " + game.getSolution();
-		Toast toast = Toast.makeText(ClassicGameActivity.this, s, Toast.LENGTH_LONG);
-		toast.show();
-		finish();
-	}
-
-	private void onWin() {
-		//Toast toast = Toast.makeText(ClassicGameActivity.this, "You won!", Toast.LENGTH_LONG);
-		//toast.show();
-		Intent intent = new Intent(ClassicGameActivity.this, WonScreenActivity.class);
-		startActivity(intent);
-		finish();
-	}
 	
     /** Called when the activity is first created. */
     @Override
@@ -75,13 +72,21 @@ public class ClassicGameActivity extends Activity {
         setupGame();
         setupWordLayout();
         
-        // debug
-    	Toast.makeText(this, game.getSolution(), Toast.LENGTH_SHORT).show();
-        // end debug
+        Bundle b = getIntent().getExtras();
+        //se non c'è bundle o non c'è score, lo score diventa 0
+        if (b == null || (score = b.getInt("score", -1)) < 0)
+        	score = 0;
+    	updateScore();
+        
+    }
+    
+    private void updateScore() {
+    	TextView scoreTextView = (TextView) findViewById(R.id.score);
+    	scoreTextView.setText(String.valueOf(score));
     }
     
     private void updateHangman() {
-		ImageView hangman = (ImageView) findViewById(R.id.hangman);
+		ImageView hangman = (ImageView) findViewById(R.id.classic_game_hangman);
 		hangman.setImageResource(R.drawable.hm0 + game.getErrors());
 	}
     
@@ -89,7 +94,7 @@ public class ClassicGameActivity extends Activity {
     	char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -102,7 +107,7 @@ public class ClassicGameActivity extends Activity {
 		char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -133,17 +138,24 @@ public class ClassicGameActivity extends Activity {
         					 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         
-        setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
         
-        setContentView(R.layout.classic_game);
+        setContentView(R.layout.survival_game);
         
         // Selezione font
         font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
         
+        //Score label
+        TextView scoreLabelTextView = (TextView) findViewById(R.id.score_label);
+        scoreLabelTextView.setTypeface(font);
+        
+        //Score
+        TextView scoreTextView = (TextView) findViewById(R.id.score);
+        scoreTextView.setTypeface(font);
         
         //Back button
-        Button backButton = (Button) findViewById(R.id.back_button);
+        Button backButton = (Button) findViewById(R.id.classic_game_back_button);
         backButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -152,7 +164,8 @@ public class ClassicGameActivity extends Activity {
 			}
 		});
         
-        Button retryButton = (Button) findViewById(R.id.retry_button);
+        //Retry button
+        Button retryButton = (Button) findViewById(R.id.classic_game_retry_button);
         retryButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
@@ -163,7 +176,8 @@ public class ClassicGameActivity extends Activity {
 			}
 		});
         
-        TableLayout keyboard = (TableLayout) findViewById(R.id.keyboard);
+        //Keyboard
+        TableLayout keyboard = (TableLayout) findViewById(R.id.classic_game_keyboard);
         for(int i = 0; i < 3; i++)
         {
         	TableRow row = (TableRow) keyboard.getChildAt(i);

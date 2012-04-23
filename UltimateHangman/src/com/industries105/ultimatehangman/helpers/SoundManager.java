@@ -1,6 +1,9 @@
-package com.industries105.ultimatehangman;
+package com.industries105.ultimatehangman.helpers;
 
 import java.util.HashMap;
+
+import com.industries105.ultimatehangman.R;
+
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;

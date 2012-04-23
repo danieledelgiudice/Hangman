@@ -1,7 +1,8 @@
-package com.industries105.ultimatehangman;
+package com.industries105.ultimatehangman.activities;
 
-import java.io.InputStream;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -14,6 +15,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -21,15 +23,16 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.industries105.ultimatehangman.R;
+import com.industries105.ultimatehangman.helpers.SoundManager;
+import com.industries105.ultimatehangman.logic.FixedWordRepository;
 import com.industries105.ultimatehangman.logic.Game;
-import com.industries105.ultimatehangman.logic.RandomWordRepository;
+import com.industries105.ultimatehangman.logic.Word;
 import com.industries105.ultimatehangman.logic.WordRepository;
 
-public class SurvivalGameActivity extends Activity {
+public class TwoPlayersGameActivity extends Activity {
 	private Game game;
 	private Typeface font;
-	
-	private int score;
 	
 	//Keyboard
     private OnClickListener keyPressed = new OnClickListener() {
@@ -44,17 +47,14 @@ public class SurvivalGameActivity extends Activity {
 			updateHangman();
 			
 			if(game.win()) {
-				Intent i = getIntent();
-				i.removeExtra("score");
-				i.putExtra("score", score + 1);
+				Toast toast = Toast.makeText(TwoPlayersGameActivity.this, "You won!", Toast.LENGTH_LONG);
+				toast.show();
 				finish();
-				startActivity(i);
-				
 			}
 			
 			if(game.lose()) {
-				String s = "You lost! The word was " + game.getSolution() + ". You made " + score + " points.";
-				Toast toast = Toast.makeText(SurvivalGameActivity.this, s, Toast.LENGTH_LONG);
+				String s = "You lost! The word was " + game.getSolution();
+				Toast toast = Toast.makeText(TwoPlayersGameActivity.this, s, Toast.LENGTH_LONG);
 				toast.show();
 				finish();
 			}
@@ -68,23 +68,10 @@ public class SurvivalGameActivity extends Activity {
         
         setupView();
         setupGame();
-        setupWordLayout();
-        
-        Bundle b = getIntent().getExtras();
-        //se non c'è bundle o non c'è score, lo score diventa 0
-        if (b == null || (score = b.getInt("score", -1)) < 0)
-        	score = 0;
-    	updateScore();
-        
-    }
-    
-    private void updateScore() {
-    	TextView scoreTextView = (TextView) findViewById(R.id.score);
-    	scoreTextView.setText(String.valueOf(score));
     }
     
     private void updateHangman() {
-		ImageView hangman = (ImageView) findViewById(R.id.classic_game_hangman);
+		ImageView hangman = (ImageView) findViewById(R.id.hangman);
 		hangman.setImageResource(R.drawable.hm0 + game.getErrors());
 	}
     
@@ -92,7 +79,7 @@ public class SurvivalGameActivity extends Activity {
     	char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -105,7 +92,7 @@ public class SurvivalGameActivity extends Activity {
 		char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.classic_game_word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -125,9 +112,57 @@ public class SurvivalGameActivity extends Activity {
 	}
 
 	private void setupGame() {
-		InputStream is = getResources().openRawResource(R.raw.wordlist);
-		WordRepository repo = new RandomWordRepository(is);
-		game = new Game(repo);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		
+		builder.setTitle(R.string.two_players_prompt_title);
+		builder.setMessage(R.string.two_players_prompt_message);
+		
+		final LinearLayout layout = new LinearLayout(this);
+		final EditText input = new EditText(this);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+																	 LinearLayout.LayoutParams.WRAP_CONTENT);
+		final float scale = getResources().getDisplayMetrics().density;
+		int margin = (int) (20 * scale + 0.5f);
+		lp.setMargins(margin, 0, margin, margin);
+		input.setLayoutParams(lp);
+		
+		layout.addView(input);
+		
+		builder.setView(layout);
+		builder.setCancelable(false);
+		
+		builder.setPositiveButton(R.string.two_players_prompt_positive,
+				new DialogInterface.OnClickListener() {
+					
+					public void onClick(DialogInterface dialog, int which) {
+						SoundManager.playClick();
+						String word = input.getText().toString().toUpperCase();
+						
+						if(Word.isAValidWord(word))
+						{
+							WordRepository repo = new FixedWordRepository(word);
+							game = new Game(repo);
+							setupWordLayout();
+							
+						} else {
+							Toast toast = Toast.makeText(TwoPlayersGameActivity.this,
+									 R.string.two_players_prompt_error, Toast.LENGTH_SHORT);
+							toast.show();
+							setupGame();
+						}
+					}
+				});
+		
+		builder.setNegativeButton(R.string.two_players_prompt_negative,
+				new DialogInterface.OnClickListener() {
+					
+					public void onClick(DialogInterface dialog, int which) {
+						SoundManager.playClick();
+						finish();
+					}
+				});
+		
+		builder.show();
 	}
 
 	private void setupView() {
@@ -139,21 +174,14 @@ public class SurvivalGameActivity extends Activity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
         
-        setContentView(R.layout.survival_game);
+        setContentView(R.layout.classic_game);
         
         // Selezione font
         font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
         
-        //Score label
-        TextView scoreLabelTextView = (TextView) findViewById(R.id.score_label);
-        scoreLabelTextView.setTypeface(font);
-        
-        //Score
-        TextView scoreTextView = (TextView) findViewById(R.id.score);
-        scoreTextView.setTypeface(font);
         
         //Back button
-        Button backButton = (Button) findViewById(R.id.classic_game_back_button);
+        Button backButton = (Button) findViewById(R.id.back_button);
         backButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -162,8 +190,7 @@ public class SurvivalGameActivity extends Activity {
 			}
 		});
         
-        //Retry button
-        Button retryButton = (Button) findViewById(R.id.classic_game_retry_button);
+        Button retryButton = (Button) findViewById(R.id.retry_button);
         retryButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
@@ -174,8 +201,7 @@ public class SurvivalGameActivity extends Activity {
 			}
 		});
         
-        //Keyboard
-        TableLayout keyboard = (TableLayout) findViewById(R.id.classic_game_keyboard);
+        TableLayout keyboard = (TableLayout) findViewById(R.id.keyboard);
         for(int i = 0; i < 3; i++)
         {
         	TableRow row = (TableRow) keyboard.getChildAt(i);
