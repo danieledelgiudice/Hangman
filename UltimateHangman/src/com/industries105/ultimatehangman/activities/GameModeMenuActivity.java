@@ -1,41 +1,28 @@
 package com.industries105.ultimatehangman.activities;
 
-import com.industries105.ultimatehangman.R;
-import com.industries105.ultimatehangman.helpers.SoundManager;
-
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 
-public class GameModeMenuActivity extends Activity {
+import com.industries105.ultimatehangman.R;
+import com.industries105.ultimatehangman.helpers.SoundManager;
+
+public class GameModeMenuActivity extends HangmanActivity {
 	
     /** Called when the activity is first created. */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {    	
+    	super.onCreate(savedInstanceState);
+    	
+    	setContentView(R.layout.game_mode_menu);
         
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        					 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        
-        
-        setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-        
-        setContentView(R.layout.game_mode_menu);
-        
-        // Selezione font
-        Typeface font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
-        
-        Button classicButton = (Button) findViewById(R.id.classic_button);        
+        setupView();
+    }
+
+	private void setupView() {
+		Button classicButton = (Button) findViewById(R.id.classic_button);        
         classicButton.setTypeface(font);
         
         Button multiplayerButton = (Button) findViewById(R.id.multiplayer_button);        
@@ -62,8 +49,6 @@ public class GameModeMenuActivity extends Activity {
 				SoundManager.playClick();
 				Intent intent = new Intent(GameModeMenuActivity.this, ClassicGameActivity.class);
 				startActivity(intent);
-				//Toast toast = Toast.makeText(GameModeMenuActivity.this, "Not supported yet.", Toast.LENGTH_SHORT);
-				//toast.show();
 			}
 		});
         
@@ -74,8 +59,6 @@ public class GameModeMenuActivity extends Activity {
 				SoundManager.playClick();
 				Intent intent = new Intent(GameModeMenuActivity.this, TwoPlayersGameActivity.class);
 				startActivity(intent);
-				//Toast toast = Toast.makeText(GameModeMenuActivity.this, "Not supported yet.", Toast.LENGTH_SHORT);
-				//toast.show();
 			}
 		});
 
@@ -85,9 +68,7 @@ public class GameModeMenuActivity extends Activity {
 			public void onClick(View v) {
 				SoundManager.playClick();
 				Intent intent = new Intent(GameModeMenuActivity.this, ArcadeGameActivity.class);
-				startActivity(intent);
-				//Toast toast = Toast.makeText(GameModeMenuActivity.this, "Not supported yet.", Toast.LENGTH_SHORT);
-				//toast.show();
+				startActivity(intent);;
 			}
 		});
 		
@@ -98,15 +79,7 @@ public class GameModeMenuActivity extends Activity {
 				SoundManager.playClick();
 				Intent intent = new Intent(GameModeMenuActivity.this, SurvivalGameActivity.class);
 				startActivity(intent);
-				//Toast toast = Toast.makeText(GameModeMenuActivity.this, "Not supported yet.", Toast.LENGTH_SHORT);
-				//toast.show();
 			}
 		});
-    }
-    
-    @Override
-    protected void onPause() {
-    	super.onPause();
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-    }
+	}
 }

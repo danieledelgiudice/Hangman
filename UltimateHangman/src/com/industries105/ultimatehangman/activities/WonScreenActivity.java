@@ -19,8 +19,6 @@ public class WonScreenActivity extends HangmanActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		
-		
 		previous = (Class<? extends Activity>) getIntent().getSerializableExtra("callingActivity"); 
 		
         setupView();
