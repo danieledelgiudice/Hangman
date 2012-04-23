@@ -2,7 +2,6 @@ package com.industries105.ultimatehangman.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.industries105.ultimatehangman.R;
 
@@ -10,9 +9,10 @@ public class ClassicGameActivity extends HangmanGameActivity {
 	
 	@Override
 	protected void onLose() {
-		String s = "You lost! The word was " + game.getSolution();
-		Toast toast = Toast.makeText(ClassicGameActivity.this, s, Toast.LENGTH_LONG);
-		toast.show();
+		Intent intent = new Intent(ClassicGameActivity.this, LostScreenActivity.class);
+		intent.putExtra("solution", game.getSolution());
+		intent.putExtra("callingActivity", ClassicGameActivity.class);
+		startActivity(intent);
 		finish();
 	}
 

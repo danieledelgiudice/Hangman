@@ -4,7 +4,24 @@
 	<string name="play_button">Play!</string>
 	<string name="options_button">Options</string>
 	<string name="info">Ultimate Hangman is awesome!</string>
+	
+	<string name="classic">Classic</string>
+	<string name="two_players">Two players</string>
+	<string name="arcade">Arcade</string>
+	<string name="survival">Survival</string>
+	    
+    <string name="two_players_prompt_title">Ultimate Hangman</string>
+	<string name="two_players_prompt_message">Choose the word to guess</string>
+	<string name="two_players_prompt_positive">Ok</string>
+	<string name="two_players_prompt_negative">Cancel</string>
+	<string name="two_players_prompt_error">The word can only contain letters, and can be 10 characters at most.</string>
+	
+	<string name="score">Score:</string>
+	<string name="time">Time:</string>
+	    
 	<string name="victory">You won!</string>
 	<string name="restart_game">Play again</string>
 	<string name="back_to_mode_selection">Game mode menu</string>
+	
+	<string name="the_word_was">The word was:</string>
 </resources>

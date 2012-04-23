@@ -10,9 +10,10 @@ import android.widget.TextView;
 
 import com.industries105.ultimatehangman.R;
 
-public class WonScreenActivity extends HangmanActivity {
+public class LostScreenActivity extends HangmanActivity {
 	
 	private Class<? extends Activity> previous;
+	private String word;
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -20,22 +21,27 @@ public class WonScreenActivity extends HangmanActivity {
 		super.onCreate(savedInstanceState);
 		
 		previous = (Class<? extends Activity>) getIntent().getSerializableExtra("callingActivity"); 
+		word = getIntent().getStringExtra("solution");
 		
         setupView();
 	}
 
 	private void setupView() {
-		setContentView(R.layout.won_screen);
+		setContentView(R.layout.lost_screen);
 		
-		TextView winTextView = (TextView) findViewById(R.id.text);
-        winTextView.setTypeface(font);
+		TextView lostTextView = (TextView) findViewById(R.id.text);
+        lostTextView.setTypeface(font);
+        
+        TextView wordTextView = (TextView) findViewById(R.id.word);
+        wordTextView.setTypeface(font);
+        wordTextView.setText(word);
         
         Button restartButton = (Button) findViewById(R.id.restart);
         restartButton.setTypeface(font);
         restartButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				Intent intent = new Intent(WonScreenActivity.this, previous);
+				Intent intent = new Intent(LostScreenActivity.this, previous);
 				startActivity(intent);
 				finish();
 			}

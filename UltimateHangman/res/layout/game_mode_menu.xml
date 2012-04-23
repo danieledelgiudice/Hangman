@@ -28,7 +28,7 @@
         android:layout_below="@id/back_button"
     	android:background="@drawable/sketch_button_background"
     	android:gravity="center"
-    	android:text="Classic"
+    	android:text="@string/classic"
     	android:textColor="@drawable/sketch_button_textcolor"
     	android:textSize="24sp"
         />
@@ -43,7 +43,7 @@
         android:layout_below="@id/classic_button"
     	android:background="@drawable/sketch_button_background"
     	android:gravity="center"
-    	android:text="Multiplayer"
+    	android:text="@string/two_players"
     	android:textColor="@drawable/sketch_button_textcolor"
     	android:textSize="24sp"
         />
@@ -58,7 +58,7 @@
         android:layout_below="@id/multiplayer_button"
     	android:background="@drawable/sketch_button_background"
     	android:gravity="center"
-    	android:text="Arcade"
+    	android:text="@string/arcade"
     	android:textColor="@drawable/sketch_button_textcolor"
     	android:textSize="24sp"
         />
@@ -76,7 +76,7 @@
         android:layout_below="@id/arcade_button"
     	android:background="@drawable/sketch_button_background"
     	android:gravity="center"
-    	android:text="Survival"
+    	android:text="@string/survival"
     	android:textColor="@drawable/sketch_button_textcolor"
     	android:textSize="24sp"
         />

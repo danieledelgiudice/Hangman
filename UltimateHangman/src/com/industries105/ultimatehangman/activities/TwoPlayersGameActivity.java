@@ -19,9 +19,10 @@ public class TwoPlayersGameActivity extends HangmanGameActivity {
 
 	@Override
 	protected void onLose() {
-		String s = "You lost! The word was " + game.getSolution();
-		Toast toast = Toast.makeText(TwoPlayersGameActivity.this, s, Toast.LENGTH_LONG);
-		toast.show();
+		Intent intent = new Intent(TwoPlayersGameActivity.this, LostScreenActivity.class);
+		intent.putExtra("solution", game.getSolution());
+		intent.putExtra("callingActivity", TwoPlayersGameActivity.class);
+		startActivity(intent);
 		finish();
 	}
 
