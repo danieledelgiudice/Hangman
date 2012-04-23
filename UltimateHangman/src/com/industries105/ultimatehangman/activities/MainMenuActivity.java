@@ -1,51 +1,33 @@
 package com.industries105.ultimatehangman.activities;
 
-import com.industries105.ultimatehangman.R;
-import com.industries105.ultimatehangman.helpers.SoundManager;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainMenuActivity extends Activity {
+import com.industries105.ultimatehangman.R;
+import com.industries105.ultimatehangman.helpers.SoundManager;
 
-    private static final String PREFS_NAME = "UltimateHangmanSettings";
+public class MainMenuActivity extends HangmanActivity {
+	
+	private boolean isSilenced;
 
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        					 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        
-        setContentView(R.layout.main_menu);
-        
-        //Setup sound
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        boolean isSilenced = settings.getBoolean("isSilenced", false);
-        
-        setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
-        SoundManager.getInstance();
-        SoundManager.initSounds(this);
-        SoundManager.loadSounds();        
-        SoundManager.setSilenced(isSilenced);
-        
-        // Selezione font
-        Typeface font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
-        
-        Button playButton = (Button) findViewById(R.id.play_button);        
+
+        setupSound();
+        setupView();
+    }
+
+	private void setupView() {
+		setContentView(R.layout.main_menu);
+		
+		Button playButton = (Button) findViewById(R.id.play_button);        
         playButton.setTypeface(font);
         
         Button optionButton = (Button) findViewById(R.id.option_button);
@@ -93,7 +75,17 @@ public class MainMenuActivity extends Activity {
 				toast.show();
 			}
 		});
-    }
+	}
+
+	private void setupSound() {
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        isSilenced = settings.getBoolean("isSilenced", false);
+        
+        SoundManager.getInstance();
+        SoundManager.initSounds(this);
+        SoundManager.loadSounds();        
+        SoundManager.setSilenced(isSilenced);
+	}
     
     private void toggleSound() {    	
     	SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);

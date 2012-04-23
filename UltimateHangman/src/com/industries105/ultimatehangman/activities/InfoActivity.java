@@ -1,38 +1,26 @@
 package com.industries105.ultimatehangman.activities;
 
-import com.industries105.ultimatehangman.R;
-import com.industries105.ultimatehangman.helpers.SoundManager;
-
-import android.app.Activity;
-import android.graphics.Typeface;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class InfoActivity extends Activity {
+import com.industries105.ultimatehangman.R;
+import com.industries105.ultimatehangman.helpers.SoundManager;
+
+public class InfoActivity extends HangmanActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        					 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-        setVolumeControlStream(AudioManager.STREAM_MUSIC); //volume buttons should control application sounds
-        
+		setupView();
+	}
+
+	private void setupView() {
 		setContentView(R.layout.info);
 		
-		// Selezione font
-        Typeface font = Typeface.createFromAsset(getAssets(), "sigs.ttf");
-        
         TextView tv = (TextView) findViewById(R.id.text_view);
         tv.setTypeface(font);
         
@@ -44,12 +32,5 @@ public class InfoActivity extends Activity {
 				finish();
 			}
 		});
-	}
-	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		
-		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
 }
