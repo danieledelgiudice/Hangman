@@ -10,6 +10,7 @@ public class SurvivalGameActivity extends HangmanGameActivity {
 	
 	private int score;
 	
+	@Override
 	protected void onLose() {
 		String s = "You lost! The word was " + game.getSolution() + ". You made " + score + " points.";
 		Toast toast = Toast.makeText(SurvivalGameActivity.this, s, Toast.LENGTH_LONG);
@@ -17,6 +18,7 @@ public class SurvivalGameActivity extends HangmanGameActivity {
 		finish();
 	}
 
+	@Override
 	protected void onWin() {
 		score += 1;
 		updateScore();
@@ -34,6 +36,7 @@ public class SurvivalGameActivity extends HangmanGameActivity {
     	scoreTextView.setText(String.valueOf(score));
     }
 
+    @Override
 	protected void setupView() {
 		super.setupView();
 		

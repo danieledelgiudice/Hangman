@@ -8,6 +8,7 @@ import com.industries105.ultimatehangman.R;
 
 public class ClassicGameActivity extends HangmanGameActivity {
 	
+	@Override
 	protected void onLose() {
 		String s = "You lost! The word was " + game.getSolution();
 		Toast toast = Toast.makeText(ClassicGameActivity.this, s, Toast.LENGTH_LONG);
@@ -15,6 +16,7 @@ public class ClassicGameActivity extends HangmanGameActivity {
 		finish();
 	}
 
+	@Override
 	protected void onWin() {
 		Intent intent = new Intent(ClassicGameActivity.this, WonScreenActivity.class);
 		intent.putExtra("callingActivity", ClassicGameActivity.class);

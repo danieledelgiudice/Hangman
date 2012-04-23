@@ -17,6 +17,7 @@ import com.industries105.ultimatehangman.logic.WordRepository;
 
 public class TwoPlayersGameActivity extends HangmanGameActivity {
 
+	@Override
 	protected void onLose() {
 		String s = "You lost! The word was " + game.getSolution();
 		Toast toast = Toast.makeText(TwoPlayersGameActivity.this, s, Toast.LENGTH_LONG);
@@ -24,6 +25,7 @@ public class TwoPlayersGameActivity extends HangmanGameActivity {
 		finish();
 	}
 
+	@Override
 	protected void onWin() {
 		Intent intent = new Intent(TwoPlayersGameActivity.this, WonScreenActivity.class);
 		intent.putExtra("callingActivity", TwoPlayersGameActivity.class);
@@ -37,6 +39,7 @@ public class TwoPlayersGameActivity extends HangmanGameActivity {
         super.onCreate(savedInstanceState, R.layout.classic_game);
     }
 
+    @Override
     protected void setupGame() {
     	if(game != null) //if i have another game ready, nothing to do here
     		return;
