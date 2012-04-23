@@ -5,6 +5,7 @@ import java.io.InputStream;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,7 +26,12 @@ import com.industries105.ultimatehangman.logic.WordRepository;
 
 public abstract class HangmanGameActivity extends HangmanActivity {
 	
+	private static final int GAME_OVER_DELAY = 1000;
+	
 	protected Game game;
+	private int layoutResId;
+	private Handler handler;
+	
 	
 	//Keyboard
     private OnClickListener keyPressed = new OnClickListener() {
@@ -40,11 +46,22 @@ public abstract class HangmanGameActivity extends HangmanActivity {
 			updateHangman();
 			
 			if(game.win()) {
-				onWin();
+				setKeyboardEnabled(false);
+				handler.postDelayed(new Runnable() {
+					
+					public void run() {
+						onWin();						
+					}
+				}, GAME_OVER_DELAY);
 			}
 			
 			if(game.lose()) {
-				onLose();
+				setKeyboardEnabled(false);
+				handler.postDelayed(new Runnable() {
+					public void run() {
+						onLose();
+					}
+				}, GAME_OVER_DELAY);
 			}
 		}
 	};
@@ -55,15 +72,23 @@ public abstract class HangmanGameActivity extends HangmanActivity {
 	public void onCreate(Bundle savedInstanceState, int layoutResId) {
         super.onCreate(savedInstanceState);
         
-        setupView(layoutResId);
-        setupGame();
-        setupWordLayout();
+        this.layoutResId = layoutResId;
+        this.handler = new Handler();
         
-        // debug
+        setupView();
+        newGame();
+        
+        // TODO: remove debug
         if(game != null)
         	Toast.makeText(this, game.getSolution(), Toast.LENGTH_SHORT).show();
-        // end debug
     }
+	
+	protected void newGame() {
+		setupGame();
+		updateHangman();
+        setupWordLayout();
+        setKeyboardEnabled(true);
+	}
     
     protected void updateHangman() {
 		ImageView hangman = (ImageView) findViewById(R.id.hangman);
@@ -74,7 +99,7 @@ public abstract class HangmanGameActivity extends HangmanActivity {
     	char[] word = game.getOutputWord();
 		int wordLen = word.length;
 		
-		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);		
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -88,6 +113,7 @@ public abstract class HangmanGameActivity extends HangmanActivity {
 		int wordLen = word.length;
 		
 		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);
+		wordLayout.removeAllViews();
 		
 		for(int i = 0; i < wordLen; i++)
 		{
@@ -112,7 +138,7 @@ public abstract class HangmanGameActivity extends HangmanActivity {
 		game = new Game(repo);
 	}
 
-	protected void setupView(int layoutResId) {
+	protected void setupView() {
 		setContentView(layoutResId);
         
         //Back button
@@ -155,4 +181,20 @@ public abstract class HangmanGameActivity extends HangmanActivity {
         	}
         }
 	}
+	
+	protected void setKeyboardEnabled(boolean value)
+    {
+		TableLayout keyboard = (TableLayout) findViewById(R.id.keyboard);
+        for(int i = 0; i < 3; i++)
+        {
+        	TableRow row = (TableRow) keyboard.getChildAt(i);
+        	int count = row.getChildCount();
+        	for(int j = 0; j < count; j++)
+        	{
+        		//Key initialization
+        		TextView tv = (TextView) row.getChildAt(j);
+        		tv.setEnabled(value);
+        	}
+        }
+    }
 }

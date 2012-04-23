@@ -36,14 +36,13 @@ public class TwoPlayersGameActivity extends HangmanGameActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.classic_game);
     }
-    
-    @Override
-    protected void setupWordLayout() {
-    	//nothing
-    }
 
     protected void setupGame() {
+    	if(game != null) //if i have another game ready, nothing to do here
+    		return;
+    	
 		showDialog();
+		game = new Game(new FixedWordRepository("")); //temp game
 	}
 
 	private void showDialog() {
@@ -78,7 +77,7 @@ public class TwoPlayersGameActivity extends HangmanGameActivity {
 						{
 							WordRepository repo = new FixedWordRepository(word);
 							game = new Game(repo);
-					    	TwoPlayersGameActivity.super.setupWordLayout();
+					    	TwoPlayersGameActivity.super.newGame();
 						} else {
 							Toast toast = Toast.makeText(TwoPlayersGameActivity.this,
 									 R.string.two_players_prompt_error, Toast.LENGTH_SHORT);

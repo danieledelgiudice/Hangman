@@ -1,5 +1,7 @@
 package com.industries105.ultimatehangman.logic;
 
+import java.util.HashSet;
+
 //rappresenta un gioco ad impiccato
 //una volta terminata la partita non è possibile più fare niente
 public class Game {
@@ -53,5 +55,14 @@ public class Game {
 	
 	public int getErrors() {
 		return _errors;
+	}
+	
+	public int getWordScore()
+	{
+		char[] solution = _word.getSolution().toCharArray();
+		HashSet<Character> set = new HashSet<Character>();
+		for(char c : solution)
+			set.add(c);
+		return set.size() * 10 + solution.length * 4;
 	}
 }

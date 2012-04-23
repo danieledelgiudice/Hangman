@@ -2,7 +2,6 @@ package com.industries105.ultimatehangman.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,9 +14,11 @@ public class WonScreenActivity extends HangmanActivity {
 	
 	private Class<? extends Activity> previous;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		
 		
 		previous = (Class<? extends Activity>) getIntent().getSerializableExtra("callingActivity"); 
