@@ -45,7 +45,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
         <activity
-            android:name=".activities.WonScreenActivityeenActivity"
+            android:name=".activities.WonScreenActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
         
