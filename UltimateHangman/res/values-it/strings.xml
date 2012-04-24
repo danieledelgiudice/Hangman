@@ -5,7 +5,7 @@
 	<string name="options_button">Opzioni</string>
 	<string name="info">Ultimate Hangman nasce come revisione del classico gioco dell\'Impiccato. Affronta il gioco in una veste grafica innovata e con nuove frenetiche modalità di gioco!</string>
 	
-	<string name="classic">Classic</string>
+	<string name="classic">Classica</string>
 	<string name="two_players">Due giocatori</string>
 	<string name="arcade">Arcade</string>
 	<string name="survival">Survival</string>
@@ -22,4 +22,9 @@
     <string name="victory">Hai vinto!</string>
    	<string name="restart_game">Gioca ancora</string>
 	<string name="back_to_mode_selection">Menu modalita\'</string>
+	
+	<string name="the_word_was">La parola era:</string>
+	<string name="game_over">Fine partita</string>
+	<string name="score_text">Hai fatto %d punti</string>
+	<string name="best_score">Nuovo record!</string>
 </resources>

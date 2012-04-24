@@ -24,4 +24,7 @@
 	<string name="back_to_mode_selection">Game mode menu</string>
 	
 	<string name="the_word_was">The word was:</string>
+	<string name="game_over">Game over</string>
+	<string name="score_text">You made %d points</string>
+	<string name="best_score">Best score!</string>
 </resources>

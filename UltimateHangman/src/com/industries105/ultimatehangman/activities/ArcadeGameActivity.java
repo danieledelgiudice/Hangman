@@ -1,9 +1,10 @@
 package com.industries105.ultimatehangman.activities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.industries105.ultimatehangman.R;
 
@@ -17,17 +18,30 @@ public class ArcadeGameActivity extends HangmanGameActivity {
 	@Override
 	protected void onWin() {
 		score += game.getWordScore();
-		Toast toast = Toast.makeText(ArcadeGameActivity.this, "You won! Score: " + score, Toast.LENGTH_LONG);
-		toast.show();
+		updateScore();
 		newGame();
 	}
 	
 	@Override
 	protected void onLose() {
-		String s = "You lost! The word was " + game.getSolution();
-		Toast toast = Toast.makeText(ArcadeGameActivity.this, s, Toast.LENGTH_LONG);
-		toast.show();
-		finish();	
+		Intent intent = new Intent(ArcadeGameActivity.this, GameOverScreenActivity.class);
+		intent.putExtra("callingActivity", ArcadeGameActivity.class);
+		intent.putExtra("score", score);
+		
+		//check for best score
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		int bestScore = settings.getInt("bestArcadeScore", 0);
+		
+		if(score > bestScore)
+		{
+			intent.putExtra("bestScore", true);
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putInt("bestArcadeScore", score);
+			editor.commit();
+		}
+		
+		startActivity(intent);
+		finish();
 	}
 	
 	private Runnable timerTick = new Runnable() {
@@ -63,6 +77,17 @@ public class ArcadeGameActivity extends HangmanGameActivity {
         
         TextView timeLabelTextView = (TextView) findViewById(R.id.time_label);
         timeLabelTextView.setTypeface(font);
+        
+        TextView scoreTextView = (TextView) findViewById(R.id.score);
+        scoreTextView.setTypeface(font);
+        
+        TextView scoreLabelTextView = (TextView) findViewById(R.id.score_label);
+        scoreLabelTextView.setTypeface(font);
+    }
+    
+    private void updateScore() {
+    	TextView scoreTextView = (TextView) findViewById(R.id.score);
+    	scoreTextView.setText(String.valueOf(score));
     }
     
     private void startTimer() {

@@ -77,10 +77,6 @@ public abstract class HangmanGameActivity extends HangmanActivity {
         
         setupView();
         newGame();
-        
-        // TODO: remove debug
-        if(game != null)
-        	Toast.makeText(this, game.getSolution(), Toast.LENGTH_SHORT).show();
     }
 	
 	protected void newGame() {
@@ -88,6 +84,10 @@ public abstract class HangmanGameActivity extends HangmanActivity {
 		updateHangman();
         setupWordLayout();
         setKeyboardEnabled(true);
+        
+        // TODO: remove debug
+        if(game != null)
+        	Toast.makeText(this, game.getSolution(), Toast.LENGTH_SHORT).show();
 	}
     
     protected void updateHangman() {

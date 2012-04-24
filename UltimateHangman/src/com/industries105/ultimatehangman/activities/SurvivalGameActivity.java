@@ -1,8 +1,9 @@
 package com.industries105.ultimatehangman.activities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.industries105.ultimatehangman.R;
 
@@ -12,9 +13,23 @@ public class SurvivalGameActivity extends HangmanGameActivity {
 	
 	@Override
 	protected void onLose() {
-		String s = "You lost! The word was " + game.getSolution() + ". You made " + score + " points.";
-		Toast toast = Toast.makeText(SurvivalGameActivity.this, s, Toast.LENGTH_LONG);
-		toast.show();
+		Intent intent = new Intent(SurvivalGameActivity.this, GameOverScreenActivity.class);
+		intent.putExtra("callingActivity", SurvivalGameActivity.class);
+		intent.putExtra("score", score);
+		
+		//check for best score
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		int bestScore = settings.getInt("bestSurvivalScore", 0);
+		
+		if(score > bestScore)
+		{
+			intent.putExtra("bestScore", true);
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putInt("bestSurvivalScore", score);
+			editor.commit();
+		}
+		
+		startActivity(intent);
 		finish();
 	}
 
