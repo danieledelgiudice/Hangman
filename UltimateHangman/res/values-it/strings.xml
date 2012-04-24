@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Ultimate Hangman</string>
 	<string name="play_button">Gioca!</string>
-	<string name="options_button">Opzioni</string>
+	<string name="scores_button">Record</string>
 	<string name="info">Ultimate Hangman nasce come revisione del classico gioco dell\'Impiccato. Affronta il gioco in una veste grafica innovata e con nuove frenetiche modalità di gioco!</string>
 	
 	<string name="classic">Classica</string>
@@ -27,4 +27,6 @@
 	<string name="game_over">Fine partita</string>
 	<string name="score_text">Hai fatto %d punti</string>
 	<string name="best_score">Nuovo record!</string>
+	
+    <string name="reset_scores">Azzera record</string>
 </resources>

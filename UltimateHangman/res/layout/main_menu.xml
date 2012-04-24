@@ -29,9 +29,9 @@
     	android:textColor="@drawable/sketch_button_textcolor"
     	android:textSize="24sp"
         />
-    	<!--  Option button -->
+    	<!--  Scores button -->
     <Button
-        android:id="@+id/option_button"
+        android:id="@+id/scores_button"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/play_button"
@@ -39,7 +39,7 @@
         android:layout_centerHorizontal="true"        
         android:background="@drawable/sketch_button_background"
         android:gravity="center"
-        android:text="@string/options_button"
+        android:text="@string/scores_button"
         android:textColor="@drawable/sketch_button_textcolor"
         android:textSize="24sp" />
     
@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/option_button"
+        android:layout_below="@id/scores_button"
         android:layout_marginTop="20dp"
       	android:layout_marginBottom="10dp"
       	android:layout_marginLeft="10dp"
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
       	android:layout_height="wrap_content"
       	android:layout_toLeftOf="@id/info_button"
-      	android:layout_below="@id/option_button"
+      	android:layout_below="@id/scores_button"
       	android:layout_marginTop="20dp"
       	android:layout_marginBottom="10dp"
       	android:layout_marginLeft="10dp"

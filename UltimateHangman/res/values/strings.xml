@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Ultimate Hangman</string>
 	<string name="play_button">Play!</string>
-	<string name="options_button">Options</string>
+	<string name="scores_button">Best scores</string>
 	<string name="info">Ultimate Hangman is awesome!</string>
 	
 	<string name="classic">Classic</string>
@@ -27,4 +27,5 @@
 	<string name="game_over">Game over</string>
 	<string name="score_text">You made %d points</string>
 	<string name="best_score">Best score!</string>
+	<string name="reset_scores">Reset scores</string>
 </resources>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.industries105.ultimatehangman.R;
 import com.industries105.ultimatehangman.helpers.SoundManager;
@@ -30,8 +29,8 @@ public class MainMenuActivity extends HangmanActivity {
 		Button playButton = (Button) findViewById(R.id.play_button);        
         playButton.setTypeface(font);
         
-        Button optionButton = (Button) findViewById(R.id.option_button);
-        optionButton.setTypeface(font);
+        Button scoresButton = (Button) findViewById(R.id.scores_button);
+        scoresButton.setTypeface(font);
         
         // Handler audio button
         Button audioButton = (Button) findViewById(R.id.sound_button);
@@ -66,13 +65,13 @@ public class MainMenuActivity extends HangmanActivity {
 			}
 		});
         
-        //Handler option button
-        optionButton.setOnClickListener(new OnClickListener() {
+        //Handler scores button
+        scoresButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
 				SoundManager.playClick();
-				Toast toast = Toast.makeText(MainMenuActivity.this, "Options not supported yet.", Toast.LENGTH_SHORT);
-				toast.show();
+				Intent intent = new Intent(MainMenuActivity.this, BestScoresActivity.class);
+				startActivity(intent);
 			}
 		});
 	}

@@ -56,6 +56,10 @@
             android:name=".activities.GameOverScreenActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>        
+        <activity
+            android:name=".activities.BestScoresActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
     </application>
 
 </manifest>
