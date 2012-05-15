@@ -3,7 +3,7 @@
     <string name="app_name">Ultimate Hangman</string>
 	<string name="play_button">Play!</string>
 	<string name="scores_button">Best scores</string>
-	<string name="info">Ultimate Hangman is a revisitation of the classic hangman game. With its stunning user interface and new frenetic playing modes, Ultimate Hangman it's the besy way to enjoy the challenge of guessing words.</string>
+	<string name="info">Ultimate Hangman is a revisitation of the classic hangman game. With its stunning user interface and new frenetic playing modes, Ultimate Hangman it\'s the besy way to enjoy the challenge of guessing words.</string>
 	
 	<string name="classic">Classic</string>
 	<string name="two_players">Two players</string>
