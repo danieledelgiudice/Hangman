@@ -13,6 +13,7 @@ public class SurvivalGameActivity extends HangmanGameActivity {
 	
 	@Override
 	protected void onLose() {
+		
 		Intent intent = new Intent(SurvivalGameActivity.this, GameOverScreenActivity.class);
 		intent.putExtra("callingActivity", SurvivalGameActivity.class);
 		intent.putExtra("score", score);

@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    >
+    
+    <RelativeLayout 
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+	    android:padding="30dp">
+			<!--  Logo  -->
+	    <ImageView
+	        android:id="@+id/logo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="90dp"
+	        android:layout_marginBottom="90dp"
+	        android:src="@drawable/logo"
+	        />
+	    
+			<!--  Play button -->
+	    <Button
+	        android:id="@+id/play_button"
+	        android:layout_height="wrap_content"
+	        android:layout_width="160dp"
+	        android:layout_below="@id/logo"
+	        android:layout_margin="10dp"
+	        android:layout_centerHorizontal="true"        
+	    	android:background="@drawable/sketch_button_background"
+	    	android:gravity="center"
+	    	android:text="@string/play_button"
+	    	android:textColor="@drawable/sketch_button_textcolor"
+	    	android:textSize="24sp"
+	        />
+	    		<!--  Scores button -->
+	    <Button
+	        android:id="@+id/scores_button"
+	        android:layout_width="160dp"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/play_button"
+	        android:layout_margin="10dp"
+	        android:layout_centerHorizontal="true"        
+	        android:background="@drawable/sketch_button_background"
+	        android:gravity="center"
+	        android:text="@string/scores_button"
+	        android:textColor="@drawable/sketch_button_textcolor"
+	        android:textSize="24sp" />
+	    
+	    <!-- Info button -->
+	    <Button
+	        android:id="@+id/info_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@id/scores_button"
+	        android:layout_marginTop="20dp"
+	      	android:layout_marginBottom="10dp"
+	      	android:layout_marginLeft="10dp"
+	      	android:layout_marginRight="10dp"
+	        android:background="@drawable/info_button_background" />
+	    
+	    <!-- Sound button -->
+	    <Button
+	        android:id="@+id/sound_button"
+	        android:layout_width="wrap_content"
+	      	android:layout_height="wrap_content"
+	      	android:layout_toLeftOf="@id/info_button"
+	      	android:layout_below="@id/scores_button"
+	      	android:layout_marginTop="20dp"
+	      	android:layout_marginBottom="10dp"
+	      	android:layout_marginLeft="10dp"
+	      	android:layout_marginRight="10dp"
+	      	android:background="@drawable/audio_on"/>
+	</RelativeLayout>	
+</RelativeLayout>

@@ -46,7 +46,7 @@ public class Word {
 	
 	public static boolean isAValidWord(String s) {
 		int len = s.length();
-		if(len == 0 || len > 13)
+		if(len == 0 || len > 10)
 			return false;
 		for(int i = 0; i < len; i++)
 			if(s.charAt(i) < 'A' || s.charAt(i) > 'Z')

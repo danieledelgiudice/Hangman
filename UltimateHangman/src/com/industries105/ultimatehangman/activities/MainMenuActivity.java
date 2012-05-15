@@ -74,6 +74,10 @@ public class MainMenuActivity extends HangmanActivity {
 				startActivity(intent);
 			}
 		});
+        
+        
+        
+      
 	}
 
 	private void setupSound() {

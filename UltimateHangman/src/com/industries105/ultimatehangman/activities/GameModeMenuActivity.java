@@ -81,5 +81,7 @@ public class GameModeMenuActivity extends HangmanActivity {
 				startActivity(intent);
 			}
 		});
+		
+		loadAds();
 	}
 }

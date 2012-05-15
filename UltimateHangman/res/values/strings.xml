@@ -3,7 +3,7 @@
     <string name="app_name">Ultimate Hangman</string>
 	<string name="play_button">Play!</string>
 	<string name="scores_button">Best scores</string>
-	<string name="info">Ultimate Hangman is awesome!</string>
+	<string name="info">Ultimate Hangman is a revisitation of the classic hangman game. With its stunning user interface and new frenetic playing modes, Ultimate Hangman it's the besy way to enjoy the challenge of guessing words.</string>
 	
 	<string name="classic">Classic</string>
 	<string name="two_players">Two players</string>
@@ -21,11 +21,13 @@
 	    
 	<string name="victory">You won!</string>
 	<string name="restart_game">Play again</string>
-	<string name="back_to_mode_selection">Game mode menu</string>
+	<string name="back_to_mode_selection">Menu</string>
 	
 	<string name="the_word_was">The word was:</string>
 	<string name="game_over">Game over</string>
 	<string name="score_text">You made %d points</string>
 	<string name="best_score">Best score!</string>
 	<string name="reset_scores">Reset scores</string>
+	
+	<string name="admob_unit_id">a14fab92c6a66b3</string>
 </resources>

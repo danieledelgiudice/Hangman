@@ -23,7 +23,7 @@ public class RandomWordRepository implements WordRepository {
 			while((line = buf.readLine()) != null) {
 				int length = line.length();
 				if(length >= 3 && length <= 10)
-					words.add(line);
+					words.add(line.toUpperCase());
 			}
 			buf.close();
 		} catch (IOException e) {

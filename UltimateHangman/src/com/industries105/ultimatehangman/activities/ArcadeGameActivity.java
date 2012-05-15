@@ -10,6 +10,7 @@ import com.industries105.ultimatehangman.R;
 
 public class ArcadeGameActivity extends HangmanGameActivity {
 	private static final int ARCADE_TIME = 120;
+	private static final int PENALTY_TIME = 10; 
 	protected TextView timeTextView;	
 	private Handler handler;
 	private long startTime;
@@ -24,6 +25,11 @@ public class ArcadeGameActivity extends HangmanGameActivity {
 	
 	@Override
 	protected void onLose() {
+		startTime -= PENALTY_TIME * 1000;
+		newGame();
+	}
+
+	private void gameOver() {
 		Intent intent = new Intent(ArcadeGameActivity.this, GameOverScreenActivity.class);
 		intent.putExtra("callingActivity", ArcadeGameActivity.class);
 		intent.putExtra("score", score);
@@ -55,7 +61,7 @@ public class ArcadeGameActivity extends HangmanGameActivity {
 				timeTextView.setText(seconds + "");
 				handler.postDelayed(timerTick, 200);
 			} else {
-				onLose();
+				gameOver();
 			}
 		}
 	};

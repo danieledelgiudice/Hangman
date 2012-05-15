@@ -1,10 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    android:padding="30dp" >
-
+    >
+    
+    <RelativeLayout 
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+	    android:padding="30dp">
 	<!-- Back button -->
     <Button
         android:id="@+id/back_button"
@@ -104,5 +109,5 @@
     	android:textColor="@drawable/sketch_button_textcolor"
     	android:textSize="18sp"
         />
-	    
+    </RelativeLayout>	
 </RelativeLayout>

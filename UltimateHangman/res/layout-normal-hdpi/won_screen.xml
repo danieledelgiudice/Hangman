@@ -1,9 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    android:padding="30dp" >
+    >
+    
+    <RelativeLayout 
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+	    android:padding="30dp">
+	
+
     
     <!--  Logo  -->
     <ImageView
@@ -25,31 +33,19 @@
         android:layout_below="@id/logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="@string/the_word_was"
-        android:textSize="25sp" />
-    
-    <!--  Word -->
-    <TextView
-        android:id="@+id/word"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:text="@string/the_word_was"
-        android:textSize="30sp" />
+        android:text="@string/victory"
+        android:textColor="@drawable/sketch_button_textcolor"
+        android:textSize="40sp" />
     
     <!-- Restart game -->
     <Button
         android:id="@+id/restart"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_below="@id/word"
-        android:layout_marginTop="30dp"
+        android:layout_below="@id/text"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"        
     	android:background="@drawable/sketch_button_background"
@@ -83,5 +79,5 @@
         />
     
     
-            
+	</RelativeLayout>	
 </RelativeLayout>

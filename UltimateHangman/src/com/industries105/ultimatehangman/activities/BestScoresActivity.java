@@ -50,7 +50,7 @@ public class BestScoresActivity extends HangmanActivity {
         backButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				SoundManager.playSound(1, 1);
+				SoundManager.playClick();
 				finish();
 			}
 		});
@@ -60,6 +60,7 @@ public class BestScoresActivity extends HangmanActivity {
         resetButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playClick();
 				resetScores();
 				updateScores();
 			}
@@ -80,5 +81,7 @@ public class BestScoresActivity extends HangmanActivity {
         
         TextView bestSurvivalScoreLabelTextView = (TextView) findViewById(R.id.survival_score_label);
         bestSurvivalScoreLabelTextView.setTypeface(font);
+        
+        loadAds();
 	}
 }

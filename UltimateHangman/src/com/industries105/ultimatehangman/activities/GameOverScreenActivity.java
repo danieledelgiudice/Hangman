@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.industries105.ultimatehangman.R;
+import com.industries105.ultimatehangman.helpers.SoundManager;
 
 public class GameOverScreenActivity extends HangmanActivity {
 	
@@ -40,6 +41,7 @@ public class GameOverScreenActivity extends HangmanActivity {
         restartButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playClick();
 				Intent intent = new Intent(GameOverScreenActivity.this, previous);
 				startActivity(intent);
 				finish();
@@ -54,6 +56,7 @@ public class GameOverScreenActivity extends HangmanActivity {
         backToModeButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playClick();
 				finish();
 			}
 		});
@@ -71,5 +74,7 @@ public class GameOverScreenActivity extends HangmanActivity {
         	String bestScoreText = getResources().getString(R.string.best_score); 
         	goTextView.setText(bestScoreText);
         }
+        
+        loadAds();
 	}
 }

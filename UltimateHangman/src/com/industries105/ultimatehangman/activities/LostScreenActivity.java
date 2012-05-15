@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.industries105.ultimatehangman.R;
+import com.industries105.ultimatehangman.helpers.SoundManager;
 
 public class LostScreenActivity extends HangmanActivity {
 	
@@ -41,6 +42,7 @@ public class LostScreenActivity extends HangmanActivity {
         restartButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playClick();
 				Intent intent = new Intent(LostScreenActivity.this, previous);
 				startActivity(intent);
 				finish();
@@ -55,8 +57,11 @@ public class LostScreenActivity extends HangmanActivity {
         backToModeButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
+				SoundManager.playClick();
 				finish();
 			}
 		});
+        
+        loadAds();
 	}
 }

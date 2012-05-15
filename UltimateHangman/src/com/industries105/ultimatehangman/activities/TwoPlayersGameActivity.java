@@ -84,9 +84,10 @@ public class TwoPlayersGameActivity extends HangmanGameActivity {
 					    	TwoPlayersGameActivity.super.newGame();
 						} else {
 							Toast toast = Toast.makeText(TwoPlayersGameActivity.this,
-									 R.string.two_players_prompt_error, Toast.LENGTH_SHORT);
+									 R.string.two_players_prompt_error, Toast.LENGTH_LONG);
 							toast.show();
-							setupGame();
+							game = null;
+							newGame();
 						}
 					}
 				});

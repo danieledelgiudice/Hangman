@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.industries105.ultimatehangman.R;
 import com.industries105.ultimatehangman.helpers.SoundManager;
@@ -44,7 +43,7 @@ public abstract class HangmanGameActivity extends HangmanActivity {
 			
 			updateWordLayout();
 			updateHangman();
-			
+						
 			if(game.win()) {
 				setKeyboardEnabled(false);
 				handler.postDelayed(new Runnable() {
@@ -56,6 +55,7 @@ public abstract class HangmanGameActivity extends HangmanActivity {
 			}
 			
 			if(game.lose()) {
+				showSolution();
 				setKeyboardEnabled(false);
 				handler.postDelayed(new Runnable() {
 					public void run() {
@@ -84,12 +84,8 @@ public abstract class HangmanGameActivity extends HangmanActivity {
 		updateHangman();
         setupWordLayout();
         setKeyboardEnabled(true);
-        
-        // TODO: remove debug
-        if(game != null)
-        	Toast.makeText(this, game.getSolution(), Toast.LENGTH_SHORT).show();
 	}
-    
+	
     protected void updateHangman() {
 		ImageView hangman = (ImageView) findViewById(R.id.hangman);
 		hangman.setImageResource(R.drawable.hm0 + game.getErrors());
@@ -107,6 +103,19 @@ public abstract class HangmanGameActivity extends HangmanActivity {
 			tv.setText(Character.toString(word[i]));
 		}
     }
+    
+    protected void showSolution() { //FIXME: remove duplication with updateWordLayout
+		char[] word = game.getSolution().toCharArray();
+		int wordLen = word.length;
+		
+		LinearLayout wordLayout = (LinearLayout) findViewById(R.id.word);		
+		
+		for(int i = 0; i < wordLen; i++)
+		{
+			TextView tv = (TextView) wordLayout.getChildAt(i);
+			tv.setText(Character.toString(word[i]));
+		}
+	}
 
 	protected void setupWordLayout() {
 		char[] word = game.getOutputWord();

@@ -1,9 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    android:padding="30dp" >
+    >
+    
+    <RelativeLayout 
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+	    android:padding="30dp">
     
     <!--  Logo  -->
     <ImageView
@@ -12,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/logo"
         />
     
@@ -24,27 +30,40 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="@string/victory"
+        android:text="@string/game_over"
         android:textColor="@drawable/sketch_button_textcolor"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
+    
+    <!--  Score view -->
+    <TextView
+        android:id="@+id/score_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:textColor="@drawable/sketch_button_textcolor"
+        android:textSize="15sp" />
     
     <!-- Restart game -->
     <Button
         android:id="@+id/restart"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/text"
-        android:layout_marginTop="50dp"
+        android:layout_width="150dp"
+        android:layout_below="@id/score_text"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"        
     	android:background="@drawable/sketch_button_background"
     	android:gravity="center"
     	android:paddingLeft="10dp"
     	android:paddingRight="10dp"
-    	android:paddingTop="10dp"
+    	android:paddingTop="40dp"
     	android:paddingBottom="15dp"
     	android:text="@string/restart_game"
     	android:textColor="@drawable/sketch_button_textcolor"
@@ -55,7 +74,7 @@
     <Button
         android:id="@+id/back_to_mode_selection_button"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_below="@id/restart"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"        
@@ -71,5 +90,5 @@
         />
     
     
-            
+	</RelativeLayout>
 </RelativeLayout>

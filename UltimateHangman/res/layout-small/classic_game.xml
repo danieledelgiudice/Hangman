@@ -1,9 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    android:padding="30dp">
+    >
+    
+    <RelativeLayout 
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+	    android:padding="30dp">
 
     <!-- Back button -->
     <Button
@@ -11,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@drawable/backtomenu_button_background" />
     
     <!-- Retry button -->
@@ -20,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@drawable/retry_button_background" />
     
     <!--  Separator -->
@@ -30,17 +36,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/retry_button"
         android:layout_centerHorizontal="true"
-        android:layout_margin="0dp"
         android:background="@drawable/uphr" />
 
     <!--  Hangman -->
     <ImageView
         android:id="@+id/hangman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:layout_below="@id/up_hr1"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@drawable/hm0" />
     
     <!-- Word -->
@@ -50,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/hangman"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:orientation="horizontal" />
     
     <!--  Separator -->
@@ -60,7 +65,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/word"
         android:layout_centerHorizontal="true"
-        android:layout_margin="0dp"
         android:background="@drawable/hr" />
     
     <!--  Keyboard -->
@@ -69,21 +73,24 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/hr"
-        android:layout_marginTop="10dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:shrinkColumns="*"  
+    	android:stretchColumns="*">
         <TableRow>
             <TextView
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="A"
-		        android:textColor="@drawable/sketch_button_textcolor" />
+		        android:textColor="@drawable/sketch_button_textcolor"/>
             
             <TextView
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="B"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -91,7 +98,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="C"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -99,7 +106,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="D"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -107,7 +114,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="E"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -115,7 +122,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="F"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -123,7 +130,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="G"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -131,7 +138,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="H"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -139,7 +146,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="I"
 		        android:textColor="@drawable/sketch_button_textcolor" />
         </TableRow>
@@ -149,7 +156,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="J"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -157,7 +164,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="K"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -165,7 +172,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="L"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -173,7 +180,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="M"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -181,7 +188,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="N"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -189,7 +196,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="O"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -197,7 +204,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="P"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -205,7 +212,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="Q"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -213,7 +220,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="R"
 		        android:textColor="@drawable/sketch_button_textcolor" />
         </TableRow>
@@ -223,7 +230,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="S"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -231,7 +238,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="T"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -239,7 +246,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="U"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -247,7 +254,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="V"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -255,7 +262,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="W"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -263,7 +270,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="X"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -271,7 +278,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="Y"
 		        android:textColor="@drawable/sketch_button_textcolor" />
             
@@ -279,9 +286,10 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="1dp"
-		        android:padding="4dp"
+		        android:padding="2dp"
 		        android:text="Z"
 		        android:textColor="@drawable/sketch_button_textcolor" />
         </TableRow>
     </TableLayout>
+    </RelativeLayout>
 </RelativeLayout>
