@@ -37,8 +37,6 @@ public abstract class HangmanActivity extends Activity {
 	protected void loadAds() {
 		AdRequest adRequest = new AdRequest();
         adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-        adRequest.addTestDevice("501B7BFDFB5D3BE28AF0687D57DCC380");
-
         
         String adMobUnitId = getResources().getString(R.string.admob_unit_id);
         AdView adView = new AdView(this, AdSize.BANNER, adMobUnitId);
