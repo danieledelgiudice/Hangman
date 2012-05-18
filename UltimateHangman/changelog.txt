@@ -1,0 +1,2 @@
+- Fixed problem with the info screen on devices with "small" screen.
+- Fixed issues with layout on devices with "small" screen.

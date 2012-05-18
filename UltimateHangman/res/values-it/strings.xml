@@ -21,7 +21,7 @@
 	
     <string name="victory">Hai vinto!</string>
    	<string name="restart_game">Gioca ancora</string>
-	<string name="back_to_mode_selection">Menu modalita\'</string>
+	<string name="back_to_mode_selection">Menu</string>
 	
 	<string name="the_word_was">La parola era:</string>
 	<string name="game_over">Fine partita</string>
